@@ -22,7 +22,17 @@ public class Sun : MonoBehaviour
         }
         transform.Translate(Vector3.down*Time.deltaTime);
     }
-    
+
+    /// <summary>
+    /// 鼠标点击阳光的时候，增加游戏管理器中的阳光数量 并且销毁自身
+    /// </summary>
+    private void OnMouseDown()
+    {
+        GameManager.Instance.SunNum += 50;
+        DestroySun();
+        print("销毁");
+    }
+
     // 销毁
     private void DestroySun()
     {
