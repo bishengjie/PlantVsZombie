@@ -29,6 +29,30 @@ public class Sun : MonoBehaviour
     private void OnMouseDown()
     {
         GameManager.Instance.SunNum += 50;
+       Vector3 sunNum= Camera.main.ScreenToWorldPoint(UIManager.Instance.GetSunNumTextPos());
+       sunNum = new Vector3(sunNum.x, sunNum.y, 0); 
+       FlyAnimation(sunNum);
+        
+    }
+
+    /// <summary>
+    /// 飞行动画
+    /// </summary>
+
+    private void FlyAnimation(Vector3 pos)
+    {
+        StartCoroutine(DoFly(pos));
+    }
+
+    private IEnumerator DoFly(Vector3 pos)
+    {
+        Vector3 direction = (pos - transform.position).normalized;
+        while (Vector3.Distance(pos, transform.position) > 1f)
+        {
+            yield return new WaitForSeconds(0.01f);
+            transform.Translate(direction);
+        }
+
         DestroySun();
         print("销毁");
     }
@@ -44,5 +68,6 @@ public class Sun : MonoBehaviour
     {
         this.downTargetPosY = downTargetPosY;
         transform.position = new Vector2(createPosX, CreatePosY);
+        
     }
 }
