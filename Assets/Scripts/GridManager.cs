@@ -18,7 +18,7 @@ public class GridManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            print(GetGridPointByMouse());
+            // print(GetGridPointByMouse());
         }
     }
 
