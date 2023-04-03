@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public class Sun : MonoBehaviour
 {
     // 下落的目标点
-    private float downTargetPosY;
+    private float downTargetPosY; 
+    // 来自天空
+    public bool isFormSky;
     void Start()
     {
         
@@ -15,6 +19,8 @@ public class Sun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isFormSky)return;
+        
         if (transform.position.y <= downTargetPosY)
         {
             Invoke("DestroySun",5);
@@ -33,6 +39,38 @@ public class Sun : MonoBehaviour
        sunNum = new Vector3(sunNum.x, sunNum.y, 0); 
        FlyAnimation(sunNum);
         
+    }
+    // 跳跃动画
+    public void JumpAnimation()
+    {
+        // 肯定来自太阳花
+        isFormSky = false;
+        StartCoroutine(DoJump());
+    }
+
+    private IEnumerator DoJump()
+    {
+        bool isLeft = Random.Range(0, 2) == 0;
+        Vector3 startPos = transform.position;
+        float x;
+        if (isLeft)
+        {
+            x = -0.01f;
+        }
+        else
+        {
+            x = 0.01f;
+        }
+        while (transform.position.y <= startPos.y + 1)
+        {
+            yield return new WaitForSeconds(0.05f);
+            transform.Translate(new Vector3(x, 0.05f, 0));
+        }
+        while (transform.position.y >= startPos.y)
+        {
+            yield return new WaitForSeconds(0.05f);
+            transform.Translate(new Vector3(x, -0.05f, 0));
+        }
     }
 
     /// <summary>
@@ -68,6 +106,6 @@ public class Sun : MonoBehaviour
     {
         this.downTargetPosY = downTargetPosY;
         transform.position = new Vector2(createPosX, CreatePosY);
-        
+        isFormSky = true;
     }
 }
