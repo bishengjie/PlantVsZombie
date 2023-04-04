@@ -5,9 +5,17 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+     public static GridManager Instance;
      private List<Vector2> pointList = new List<Vector2>();
      private List<Grid> GridList = new List<Grid>();
-    void Start()
+
+
+     private void Awake()
+     {
+         Instance = this;
+     }
+
+     void Start()
     {
         // CreateGridBaseColl();
        // CreateGridBasePointList();
@@ -18,7 +26,7 @@ public class GridManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-             print(GetGridPointByMouse());
+           //  print(GetGridPointByMouse());
         }
     }
 

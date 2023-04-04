@@ -9,5 +9,8 @@ public class GameConf : ScriptableObject
 {
      [Tooltip("阳光")] 
      public GameObject Sun;
+     
+     [Tooltip("太阳花")] 
+     public GameObject SunFlower;
 
 }

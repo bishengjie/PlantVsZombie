@@ -35,9 +35,9 @@ public class Sun : MonoBehaviour
     private void OnMouseDown()
     {
         PlayerManager.Instance.SunNum += 50;
-       Vector3 sunNum= Camera.main.ScreenToWorldPoint(UIManager.Instance.GetSunNumTextPos());
-       sunNum = new Vector3(sunNum.x, sunNum.y, 0); 
-       FlyAnimation(sunNum);
+        Vector3 sunNum= Camera.main.ScreenToWorldPoint(UIManager.Instance.GetSunNumTextPos());
+        sunNum = new Vector3(sunNum.x, sunNum.y, 0); 
+        FlyAnimation(sunNum);
         
     }
     // 跳跃动画

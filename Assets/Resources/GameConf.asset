@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameConf
   m_EditorClassIdentifier: 
   Sun: {fileID: 669681080118290993, guid: 163b2b90cc9e6cb4c9fcbcbc7d65456a, type: 3}
+  SunFlower: {fileID: 6573398450271479225, guid: 3658e97cb81bf9c4d88e420f6fdb947a, type: 3}
