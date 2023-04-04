@@ -58,6 +58,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 GameObject prefab = PlantManager.Instance.GetPlantForType(PlantType.SunFlower);
                 // print(prefab);//null
                 plant = Instantiate(prefab, Vector3.zero, Quaternion.identity, PlantManager.Instance.transform);
+                plant.GetComponent<SunFlower>().InitForCreate(false);
             }
             else
             {
@@ -84,11 +85,12 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             plant.transform.position = new Vector3(mousePoint.x, mousePoint.y, 0);
             
             // 如果距离网格较近，需要在网格上出现一个透明的植物
-            if (Vector2.Distance(mousePoint, GridManager.Instance.GetGridPointByMouse()) < 3)
+            if (Vector2.Distance(mousePoint, GridManager.Instance.GetGridPointByMouse()) < 1.5)
             {
                 if (plantInGrid == null)
                 {
                     plantInGrid = Instantiate(plant, GridManager.Instance.GetGridPointByMouse(), Quaternion.identity, PlantManager.Instance.transform);
+                    plantInGrid.GetComponent<SunFlower>().InitForCreate(true);
                 }
                 else
                 {

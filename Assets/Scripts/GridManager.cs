@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-     public static GridManager Instance;
-     private List<Vector2> pointList = new List<Vector2>();
-     private List<Grid> GridList = new List<Grid>();
+    public static GridManager Instance;
+    private List<Vector2> pointList = new List<Vector2>();
+    private List<Grid> GridList = new List<Grid>();
 
 
-     private void Awake()
-     {
-         Instance = this;
-     }
+    private void Awake()
+    {
+        Instance = this;
+    }
 
-     void Start()
+    void Start()
     {
         // CreateGridBaseColl();
-       // CreateGridBasePointList();
+        // CreateGridBasePointList();
         CreateGridBaseGrid();
     }
 
@@ -26,7 +26,7 @@ public class GridManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-           //  print(GetGridPointByMouse());
+            //  print(GetGridPointByMouse());
         }
     }
 
@@ -70,19 +70,20 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < 5; j++)
             {
-                GridList.Add(new Grid(new Vector2(i,j),transform.position+new Vector3(1.33f*i,1.63f*j,0),false));
-                    
+                GridList.Add(new Grid(new Vector2(i, j), transform.position + new Vector3(1.33f * i, 1.63f * j, 0),
+                    false));
+
             }
         }
     }
 
-    
+
     // 通过鼠标获取网格坐标点
     public Vector2 GetGridPointByMouse()
     {
         return GetGridPointByWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
     }
-    
+
     // 通过世界坐标来获取一个网格坐标点
     public Vector2 GetGridPointByWorldPos(Vector2 worldPos)
     {
@@ -92,10 +93,11 @@ public class GridManager : MonoBehaviour
         {
             if (Vector2.Distance(worldPos, GridList[i].Position) < distance)
             {
-                distance=Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), GridList[i].Position);
+                distance = Vector2.Distance(worldPos, GridList[i].Position);
                 point = GridList[i].Position;
             }
         }
+
         return point;
     }
 }

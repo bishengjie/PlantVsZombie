@@ -4,17 +4,36 @@ using UnityEngine;
 
 public class SunFlower : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    
+    // 寻找自身相关组件
+    private void Find()
     {
-        InvokeRepeating("CreateSun",3,3);
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+  
+    // 创建时的初始化
+    public void InitForCreate(bool inGrid)
+    {
+        Find();
+        animator.speed = 0;
+        if (inGrid)
+        {
+            spriteRenderer.sortingOrder = -1;
+            spriteRenderer.color = new Color(1,1,1,0.6f);
+        }
+    }
+    
+    // 放置时的初始化
+    public void InitForPlace()
+    {
+        animator.speed = 1;
+        spriteRenderer.sortingOrder = 0;
+        InvokeRepeating("CreateSun", 3, 3);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     // 创建阳光
     private void CreateSun()
     {
