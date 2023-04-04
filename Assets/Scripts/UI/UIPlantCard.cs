@@ -99,6 +99,19 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 {
                     plantInGrid.transform.position = GridManager.Instance.GetGridPointByMouse();
                 }
+                
+                // 如果点击鼠标，需要放置植物
+                if (Input.GetMouseButtonDown(0))//0
+                {
+                    plant.transform.position = GridManager.Instance.GetGridPointByMouse();
+                    plant.GetComponent<SunFlower>().InitForPlace();
+                    plant = null;
+                    //
+                    Destroy(plantInGrid.gameObject);
+                    plantInGrid = null;
+                    WantPlant = false;
+                    CanPlant = false;
+                }
             }
             else
             {
@@ -108,17 +121,15 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     plantInGrid = null;
                 }
             }
-            // 如果点击鼠标，需要放置植物
-            if (Input.GetMouseButtonDown(1))//0
-            {
-                plant.transform.position = GridManager.Instance.GetGridPointByMouse();
-                plant.GetComponent<SunFlower>().InitForPlace();
-                plant = null;
-                //
-                Destroy(plantInGrid.gameObject);
-                plantInGrid = null;
-                WantPlant = false;
-            }
+        }
+        // 如果右键取消放置状态
+        if (Input.GetMouseButtonDown(1)) //0
+        {
+            if (plant!=null) Destroy(plant.gameObject);
+            if (plantInGrid!=null) Destroy(plantInGrid.gameObject);
+            plant = null;
+            plantInGrid = null;
+            WantPlant = false;
         }
     }
 

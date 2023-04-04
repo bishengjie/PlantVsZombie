@@ -61,15 +61,20 @@ public class Sun : MonoBehaviour
         {
             x = 0.01f;
         }
+
+        float speed = 0;
         while (transform.position.y <= startPos.y + 1)
         {
-            yield return new WaitForSeconds(0.05f);
-            transform.Translate(new Vector3(x, 0.05f, 0));
+            yield return new WaitForSeconds(0.002f);
+            speed += 0.001f;
+            transform.Translate(new Vector3(x, 0.002f + speed, 0));
         }
+
         while (transform.position.y >= startPos.y)
         {
-            yield return new WaitForSeconds(0.05f);
-            transform.Translate(new Vector3(x, -0.05f, 0));
+            yield return new WaitForSeconds(0.002f);
+            speed += 0.001f;
+            transform.Translate(new Vector3(x, -0.002f - speed, 0));
         }
     }
 

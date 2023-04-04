@@ -346,6 +346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SunFlower
       objectReference: {fileID: 0}
+    - target: {fileID: 6573398450271479227, guid: 3658e97cb81bf9c4d88e420f6fdb947a, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6573398450271479228, guid: 3658e97cb81bf9c4d88e420f6fdb947a, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -935,7 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CDTime: 8
+  CDTime: 7.5
 --- !u!1 &770714262
 GameObject:
   m_ObjectHideFlags: 0
