@@ -18,7 +18,7 @@ public class SunFlower : MonoBehaviour
     // 创建阳光
     private void CreateSun()
     {
-        Sun sun = Instantiate(GameManager.Instance.Prefab_sun, transform.position, Quaternion.identity, transform)
+        Sun sun = Instantiate(GameManager.Instance.GameConf.Sun, transform.position, Quaternion.identity, transform)
             .GetComponent<Sun>();
         // 让阳光进行跳跃动画
         sun.JumpAnimation();

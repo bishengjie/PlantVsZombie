@@ -18,7 +18,7 @@ public class GridManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // print(GetGridPointByMouse());
+             print(GetGridPointByMouse());
         }
     }
 
@@ -72,11 +72,17 @@ public class GridManager : MonoBehaviour
     // 通过鼠标获取网格坐标点
     public Vector2 GetGridPointByMouse()
     {
+        return GetGridPointByWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+    }
+    
+    // 通过世界坐标来获取一个网格坐标点
+    public Vector2 GetGridPointByWorldPos(Vector2 worldPos)
+    {
         float distance = 1000000;
         Vector2 point = new Vector2();
         for (int i = 0; i < GridList.Count; i++)
         {
-            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), GridList[i].Position) < distance)
+            if (Vector2.Distance(worldPos, GridList[i].Position) < distance)
             {
                 distance=Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), GridList[i].Position);
                 point = GridList[i].Position;
