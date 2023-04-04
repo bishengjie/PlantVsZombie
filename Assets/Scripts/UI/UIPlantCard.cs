@@ -62,8 +62,11 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
             else
             {
-                Destroy(plant.gameObject);
-                plant = null;
+                if (plant != null)
+                {
+                    Destroy(plant.gameObject);
+                    plant = null;
+                }
             }
         }
     }
@@ -105,8 +108,18 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     plantInGrid = null;
                 }
             }
+            // 如果点击鼠标，需要放置植物
+            if (Input.GetMouseButtonDown(1))//0
+            {
+                plant.transform.position = GridManager.Instance.GetGridPointByMouse();
+                plant.GetComponent<SunFlower>().InitForPlace();
+                plant = null;
+                //
+                Destroy(plantInGrid.gameObject);
+                plantInGrid = null;
+                WantPlant = false;
+            }
         }
-
     }
 
     // 进入CD
