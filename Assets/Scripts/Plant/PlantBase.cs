@@ -90,6 +90,7 @@ public abstract  class PlantBase : MonoBehaviour
 
     private void Dead()
     {
+        currentGrid.CurrPlantBase = null;
         Destroy(gameObject);
     }
     protected virtual void OnInitForPlace()
