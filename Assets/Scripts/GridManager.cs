@@ -9,17 +9,17 @@ public class GridManager : MonoBehaviour
     private List<Vector2> pointList = new List<Vector2>();
     private List<Grid> GridList = new List<Grid>();
 
-
     private void Awake()
     {
         Instance = this;
+        CreateGridBaseGrid();
     }
 
     void Start()
     {
         // CreateGridBaseColl();
         // CreateGridBasePointList();
-        CreateGridBaseGrid();
+        
     }
 
     private void Update()
@@ -103,5 +103,21 @@ public class GridManager : MonoBehaviour
             }
         }
         return grid;
+    }
+    ///<summary>
+    ///通过Y轴来寻找一个网格，从下往上 0开始
+    /// </summary>>
+    /// <param name="verticalNum"></param>
+    /// <returns></returns>
+    public Grid GetGridByVerticalNum(int verticalNum)
+    {
+        for (int i = 0; i < GridList.Count; i++)
+        {
+            if (GridList[i].Point == new Vector2(8, verticalNum))
+            {
+                return GridList[i];
+            }
+        }
+        return null;
     }
 }
