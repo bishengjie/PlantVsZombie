@@ -89,9 +89,12 @@ public class Sun : MonoBehaviour
 
     private IEnumerator DoFly(Vector3 pos)
     {
-        Vector3 direction = (pos - transform.position).normalized;
-        while (Vector3.Distance(pos, transform.position) > 1f)
+        // pos 终点
+        // 500
+        
+        while (Vector3.Distance(pos, transform.position) > 0.05f)
         {
+            Vector3 direction = (pos - transform.position).normalized*0.05f;
             yield return new WaitForSeconds(0.01f);
             transform.Translate(direction);
         }

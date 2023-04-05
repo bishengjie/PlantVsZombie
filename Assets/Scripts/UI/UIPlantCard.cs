@@ -22,9 +22,12 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // 是否需要放置植物
     private bool wantPlant;
     // 用来创建的植物
-    private GameObject plant;
+    private PlantBase plant;
     // 在网格中的植物，它是透明的
-    private GameObject plantInGrid;
+    private PlantBase plantInGrid;
+    
+    // 当前卡片所对应的植物类型
+    public PlantType CardPlantType;
 
     public bool CanPlant
     {
@@ -55,10 +58,11 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             wantPlant = value;
             if (wantPlant)
             {
-                GameObject prefab = PlantManager.Instance.GetPlantForType(PlantType.SunFlower);
+                GameObject prefab = PlantManager.Instance.GetPlantForType(CardPlantType);
                 // print(prefab);//null
-                plant = Instantiate(prefab, Vector3.zero, Quaternion.identity, PlantManager.Instance.transform);
-                plant.GetComponent<SunFlower>().InitForCreate(false);
+                plant = Instantiate(prefab, Vector3.zero, Quaternion.identity, PlantManager.Instance.transform)
+                    .GetComponent<PlantBase>();
+                plant.InitForCreate(false);
             }
             else
             {
@@ -92,8 +96,8 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 if (plantInGrid == null)
                 {
-                    plantInGrid = Instantiate(plant, GridManager.Instance.GetGridPointByMouse(), Quaternion.identity, PlantManager.Instance.transform);
-                    plantInGrid.GetComponent<SunFlower>().InitForCreate(true);
+                    plantInGrid = Instantiate(plant.gameObject, GridManager.Instance.GetGridPointByMouse(), Quaternion.identity, PlantManager.Instance.transform).GetComponent<PlantBase>();
+                    plantInGrid.InitForCreate(true);
                 }
                 else
                 {
@@ -104,7 +108,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 if (Input.GetMouseButtonDown(0))//0
                 {
                     plant.transform.position = GridManager.Instance.GetGridPointByMouse();
-                    plant.GetComponent<SunFlower>().InitForPlace();
+                    plant.InitForPlace();
                     plant = null;
                     //
                     Destroy(plantInGrid.gameObject);

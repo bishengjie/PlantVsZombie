@@ -6,7 +6,8 @@ using UnityEngine;
 
 public enum PlantType
 {
-     SunFlower
+     SunFlower,
+     Peashooter
 }
 public class PlantManager : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class PlantManager : MonoBehaviour
           {
                case PlantType.SunFlower:
                     return GameManager.Instance.GameConf.SunFlower;
+               case PlantType.Peashooter:
+                    return GameManager.Instance.GameConf.Peashooter;
+                    
           }
           return null;
      }

@@ -225,7 +225,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b8d1d93fa0401f2459e6fd820b400044, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39ed5d9c526127f4fa05835722801fc5, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -296,7 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CDTime: 8
+  CDTime: 7.5
+  CardPlantType: 1
 --- !u!114 &95763165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b8d1d93fa0401f2459e6fd820b400044, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39ed5d9c526127f4fa05835722801fc5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -450,6 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CDTime: 8
+  CardPlantType: 0
 --- !u!114 &133074598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,6 +942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CDTime: 7.5
+  CardPlantType: 0
 --- !u!1 &770714262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CDTime: 8
+  CardPlantType: 0
 --- !u!114 &918573308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1398,6 +1402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CDTime: 8
+  CardPlantType: 0
 --- !u!114 &1012384925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2026,6 +2031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CDTime: 8
+  CardPlantType: 0
 --- !u!114 &1572434122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2416,3 +2422,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116897217}
   m_CullTransparentMesh: 1
+--- !u!1001 &5927592771805344367
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.5154696
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.5866687
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986666, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927592771599986669, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
+      propertyPath: m_Name
+      value: 'Peashooter '
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}

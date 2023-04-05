@@ -12,5 +12,8 @@ public class GameConf : ScriptableObject
      
      [Tooltip("太阳花")] 
      public GameObject SunFlower;
+     
+     [Tooltip("豌豆射手")] 
+     public GameObject Peashooter;
 
 }
