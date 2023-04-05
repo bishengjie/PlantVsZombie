@@ -8,6 +8,8 @@ public class Zombie : MonoBehaviour
     private Grid currGrid;
     // 速度决定几秒走一路
     private float speed = 5;
+    // 在攻击中
+    private bool isAttackState;
     void Start()
     {
         animator=GetComponentInChildren<Animator>();
@@ -33,18 +35,37 @@ public class Zombie : MonoBehaviour
         Move();
     }
 
-    private void Move()
-    {
-        if(currGrid==null)return;
-
-        transform.Translate((new Vector2(-1.33f, 0) * (Time.deltaTime / 1))/ speed);
-        
-    }
 
     // 获取一个网格，决定僵尸在哪出现
     private void GetGridByVerticalNum(int verticalNum)
     {
         currGrid = GridManager.Instance.GetGridByVerticalNum(verticalNum);
         transform.position = new Vector3(transform.position.x, currGrid.Position.y);
+    }
+
+    private void Move()
+    {
+        // 如果当前网格为空跳过移动检测
+        if (currGrid == null) return;
+        // 如果在攻击中也跳过移动检测
+        if(isAttackState)return;
+        currGrid = GridManager.Instance.GetGridByWorldPos(transform.position);
+        // 当前网格中有植物并且在我的左边且距离很近
+        if (currGrid.HavePlant
+            && currGrid.CurrPlantBase.transform.position.x < transform.position.x
+            && transform.position.x - currGrid.CurrPlantBase.transform.position.x < 0.3f)
+        {
+            // 攻击植物
+            Attack(currGrid.CurrPlantBase);
+
+        }
+        transform.Translate((new Vector2(-1.33f, 0) * (Time.deltaTime / 1)) / speed);
+    }
+
+    private void Attack(PlantBase plant)
+    {
+        isAttackState = true;
+        // 自身播放攻击动画
+        animator.Play("Zombie_Attack");
     }
 }
