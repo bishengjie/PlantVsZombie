@@ -6,8 +6,9 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
+
     // 阳光的数量
-    private int sunNum;
+    private int sunNum = 100;
 
     public int SunNum
     {
@@ -18,20 +19,10 @@ public class PlayerManager : MonoBehaviour
             UIManager.Instance.UpdateSunNum(sunNum);
         }
     }
+
     private void Awake()
     {
         Instance = this;
-        
-    }
 
-    void Start()
-    {
-        SunNum = 100;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

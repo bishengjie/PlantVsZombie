@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WantSunNum: 100
   CDTime: 7.5
   CardPlantType: 1
 --- !u!114 &95763165
@@ -450,6 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WantSunNum: 0
   CDTime: 8
   CardPlantType: 0
 --- !u!114 &133074598
@@ -941,6 +943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WantSunNum: 50
   CDTime: 7.5
   CardPlantType: 0
 --- !u!1 &770714262
@@ -1308,6 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WantSunNum: 0
   CDTime: 8
   CardPlantType: 0
 --- !u!114 &918573308
@@ -1446,6 +1450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WantSunNum: 0
   CDTime: 8
   CardPlantType: 0
 --- !u!114 &1012384925
@@ -2180,6 +2185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WantSunNum: 0
   CDTime: 8
   CardPlantType: 0
 --- !u!114 &1572434122

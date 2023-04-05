@@ -14,10 +14,8 @@ public abstract  class PlantBase : MonoBehaviour
     protected Grid currentGrid;
     protected float hp;
 
-    public float Hp
-    {
-        get => hp;
-    }
+    public float Hp { get => hp; }
+    public abstract float MaxHp { get ; }
     
     // 寻找自身相关组件
     protected void Find()

@@ -5,9 +5,17 @@ using UnityEngine;
 public class SunFlower : PlantBase
 {
     // 创建阳光需要的时间
-    private float createSunTime = 5;
+    private float createSunTime = 24;
     // 变成金色需要的时间
     private float goldWantTime = 1;
+    public override float MaxHp
+    {
+        get
+        {
+            return 300;
+            
+        }
+    }
     
     protected override void OnInitForPlace()
     {

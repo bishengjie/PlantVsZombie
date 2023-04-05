@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,5 +7,12 @@ using UnityEngine;
 /// </summary>
 public class Peashooter : PlantBase
 {
-    
+    public override float MaxHp
+    {
+        get
+        {
+            return 300;
+            
+        }
+    }
 }

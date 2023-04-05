@@ -9,7 +9,12 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     // 遮罩图片的img组件
     private Image maskImage;
+    // 需要阳光数量的text
+    private Text wantSunText;
 
+    // 种植需要多少阳光
+    public int WantSunNum;
+    
     // 冷却时间：几秒可以放置一次植物
     public float CDTime;
 
@@ -78,6 +83,8 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void Start()
     {
         maskImage = transform.Find("Mask").GetComponent<Image>();
+        wantSunText = transform.Find("Text ").GetComponent<Text >();
+        wantSunText.text = WantSunNum.ToString();
         CanPlant = false;
     }
     
@@ -116,6 +123,8 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     plantInGrid = null;
                     WantPlant = false;
                     CanPlant = false;
+                    // 种植成功需要减少玩家的阳光
+                    PlayerManager.Instance.SunNum -= WantSunNum;
                 }
             }
             else
