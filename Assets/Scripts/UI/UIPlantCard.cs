@@ -88,27 +88,28 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             // 让植物跟随鼠标
             Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-             // print(mousePoint);
+            Grid grid = GridManager.Instance.GetGridByWorldPos(mousePoint);
+            
             plant.transform.position = new Vector3(mousePoint.x, mousePoint.y, 0);
             
-            // 如果距离网格较近，需要在网格上出现一个透明的植物
-            if (Vector2.Distance(mousePoint, GridManager.Instance.GetGridPointByMouse()) < 1.5)
+            // 如果距离网格较近，并且没有植物，需要在网格上出现一个透明的植物
+            if (grid.HavePlant == false && Vector2.Distance(mousePoint, grid.Position) < 1.5)
             {
                 if (plantInGrid == null)
                 {
-                    plantInGrid = Instantiate(plant.gameObject, GridManager.Instance.GetGridPointByMouse(), Quaternion.identity, PlantManager.Instance.transform).GetComponent<PlantBase>();
+                    plantInGrid = Instantiate(plant.gameObject, grid.Position, Quaternion.identity, PlantManager.Instance.transform).GetComponent<PlantBase>();
                     plantInGrid.InitForCreate(true);
                 }
                 else
                 {
-                    plantInGrid.transform.position = GridManager.Instance.GetGridPointByMouse();
+                    plantInGrid.transform.position = grid.Position;
                 }
-                
+
                 // 如果点击鼠标，需要放置植物
-                if (Input.GetMouseButtonDown(0))//0
+                if (Input.GetMouseButtonDown(0)) //0
                 {
-                    plant.transform.position = GridManager.Instance.GetGridPointByMouse();
-                    plant.InitForPlace();
+                    plant.transform.position = grid.Position;
+                    plant.InitForPlace(grid);
                     plant = null;
                     //
                     Destroy(plantInGrid.gameObject);

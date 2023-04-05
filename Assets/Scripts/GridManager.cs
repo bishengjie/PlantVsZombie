@@ -87,17 +87,21 @@ public class GridManager : MonoBehaviour
     // 通过世界坐标来获取一个网格坐标点
     public Vector2 GetGridPointByWorldPos(Vector2 worldPos)
     {
+       return GetGridByWorldPos(worldPos).Position;
+    }
+    
+    public Grid GetGridByWorldPos(Vector2 worldPos)
+    {
         float distance = 1000000;
-        Vector2 point = new Vector2();
+        Grid grid= null;
         for (int i = 0; i < GridList.Count; i++)
         {
             if (Vector2.Distance(worldPos, GridList[i].Position) < distance)
             {
                 distance = Vector2.Distance(worldPos, GridList[i].Position);
-                point = GridList[i].Position;
+                grid = GridList[i];
             }
         }
-
-        return point;
+        return grid;
     }
 }
