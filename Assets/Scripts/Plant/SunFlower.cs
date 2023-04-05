@@ -11,28 +11,17 @@ public class SunFlower : PlantBase
     
     protected override void OnInitForPlace()
     {
+        hp = 300f;
         InvokeRepeating("CreateSun", createSunTime, createSunTime);
     }
     // 创建阳光
     private void CreateSun()
     {
-        StartCoroutine(DoCreateSun());
+        StartCoroutine(ColorEF(goldWantTime,new Color(1,0.6f,0),0.05f,InstantiateSun));
     }
 
-    IEnumerator DoCreateSun()
+    private void InstantiateSun()
     {
-        float currentTime = 0;
-        currentTime += 0.8f;
-        float lerp;
-        while (currentTime<goldWantTime)
-        {
-            yield return new WaitForSeconds(0.8f);
-            lerp = currentTime / goldWantTime;
-            currentTime += 0.8f;
-            spriteRenderer.color = Color.Lerp(Color.white, new Color(1, 0.6f, 0), lerp);
-
-        }
-        spriteRenderer.color=Color.white;
         Sun sun = Instantiate(GameManager.Instance.GameConf.Sun, transform.position, Quaternion.identity, transform)
             .GetComponent<Sun>();
         // 让阳光进行跳跃动画

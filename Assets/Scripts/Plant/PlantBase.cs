@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 /// <summary>
 /// 植物的基类
 /// </summary>
@@ -11,6 +12,12 @@ public abstract  class PlantBase : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     // 当前植物所在的网格
     protected Grid currentGrid;
+    protected float hp;
+
+    public float Hp
+    {
+        get => hp;
+    }
     
     // 寻找自身相关组件
     protected void Find()
@@ -46,6 +53,45 @@ public abstract  class PlantBase : MonoBehaviour
         OnInitForPlace();
     }
 
+    /// <summary>
+    /// 受伤方法，被僵尸攻击调用
+    /// </summary>
+    /// <param name="hurtValue"></param>
+    public void Hurt(float hurtValue)
+    {
+        hp -= hurtValue;
+        print(hp);
+        // 发光效果
+        StartCoroutine(ColorEF(0.2f, new Color(0.5f, 0.5f, 0.5f), 0.05f, null));
+        if (hp <= 0)
+        {
+            // 死亡
+            Dead();
+        }
+    }
+
+    // 颜色变化效果
+    protected IEnumerator ColorEF(float wantTime, Color targetColor, float delayTime, UnityAction fun)
+    {
+        float currentTime = 0;
+        float lerp;
+        while (currentTime < wantTime)
+        {
+            yield return new WaitForSeconds(delayTime);
+            lerp = currentTime / wantTime;
+            currentTime += delayTime;
+            spriteRenderer.color = Color.Lerp(Color.white, targetColor, lerp);
+
+        }
+
+        spriteRenderer.color = Color.white;
+        if (fun != null) fun();
+    }
+
+    private void Dead()
+    {
+        Destroy(gameObject);
+    }
     protected virtual void OnInitForPlace()
     {
         

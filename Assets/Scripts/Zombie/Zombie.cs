@@ -10,6 +10,8 @@ public class Zombie : MonoBehaviour
     private float speed = 5;
     // 在攻击中
     private bool isAttackState;
+    // 攻击力
+    private float attackValue = 100;
     void Start()
     {
         animator=GetComponentInChildren<Animator>();
@@ -67,5 +69,19 @@ public class Zombie : MonoBehaviour
         isAttackState = true;
         // 自身播放攻击动画
         animator.Play("Zombie_Attack");
+        
+        // 植物的相关逻辑
+        StartCoroutine(DoHurt(plant));
+    }
+    
+    // 附伤害给植物
+    IEnumerator DoHurt(PlantBase plant)
+    {
+        // 植物的什么大于则扣血
+        while (currGrid.CurrPlantBase.Hp>0)
+        {
+            plant.Hurt(attackValue/5);
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 }
