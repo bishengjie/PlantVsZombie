@@ -26,6 +26,9 @@ public class Zombie : MonoBehaviour
 
     // 在攻击中
     private bool isAttackState;
+    
+    // 是否已经失去头
+    private bool isLostHead = false;
 
     // 攻击力
     private float attackValue = 100;
@@ -38,35 +41,24 @@ public class Zombie : MonoBehaviour
         set
         {
             state = value;
-            switch (state)
-            {
-                case ZombieState.Idel:
-                    // 播放行走动画，但是要卡在第一帧
-                    animator.Play(walkAnimationStr, 0, 0);
-                    animator.speed = 0;
-                    break;
-                case ZombieState.Walk:
-                    animator.Play(walkAnimationStr);
-                    animator.speed = 1;
-                    break;
-                case ZombieState.Attack:
-                    animator.Play("Zombie_Attack");
-                    animator.speed = 1;
-                    break;
-                case ZombieState.Dead:
-                    break;
-            }
+            CheckState();
         }
     }
-    public Grid CurrGrid
-    {
-        get => currGrid;
-    }
+    public Grid CurrGrid { get => currGrid; }
 
     public int Hp
     {
         get => hp;
         set { hp = value;
+            if (hp <= 90&&!isLostHead)
+            {
+                // 头掉
+                isLostHead = true;
+                walkAnimationStr =  "Zombie_LostHead";
+                // 状态检测
+                CheckState();
+                
+            }
             if (hp<=0)
             {
                 State = ZombieState.Dead;
@@ -103,7 +95,29 @@ public class Zombie : MonoBehaviour
     {
         FSM();
     }
-
+    
+    // 状态检测
+    private void CheckState()
+    {
+        switch (State)
+        {
+            case ZombieState.Idel:
+                // 播放行走动画，但是要卡在第一帧
+                animator.Play(walkAnimationStr, 0, 0);
+                animator.speed = 0;
+                break;
+            case ZombieState.Walk:
+                animator.Play(walkAnimationStr);
+                animator.speed = 1;
+                break;
+            case ZombieState.Attack:
+                animator.Play("Zombie_Attack");
+                animator.speed = 1;
+                break;
+            case ZombieState.Dead:
+                break;
+        }
+    }
     // 状态检测
     private void FSM()
     {
