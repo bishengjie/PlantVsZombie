@@ -7,14 +7,16 @@ public class Bullet : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
     private SpriteRenderer spriteRenderer;
-
+    // 攻击力
+    private int attackValue;
     // 是否击中
     private bool isHit = false;
-    void Start()
+    public void Init(int attackValue)
     {
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody.AddForce(Vector2.right * 300);
+        this.attackValue = attackValue;
 
     }
 
@@ -31,6 +33,8 @@ public class Bullet : MonoBehaviour
         if (col.tag == "Zombie")
         {
             isHit = true;
+            // 让僵尸受伤
+            col.GetComponentInParent<Zombie>().Hurt(attackValue);
             // 修改成击中的图片
             spriteRenderer.sprite = GameManager.Instance.GameConf.Bullet1Hit;
             // 暂停自身的运动

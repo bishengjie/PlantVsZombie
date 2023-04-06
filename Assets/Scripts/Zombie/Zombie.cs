@@ -16,11 +16,11 @@ public class Zombie : MonoBehaviour
 {
     // 我的状态
     private ZombieState state;
-
     private Animator animator;
-
     private Grid currGrid;
 
+    // 生命值
+    private int hp = 270;
     // 速度决定几秒走一路
     private float speed = 5;
 
@@ -61,6 +61,17 @@ public class Zombie : MonoBehaviour
     public Grid CurrGrid
     {
         get => currGrid;
+    }
+
+    public int Hp
+    {
+        get => hp;
+        set { hp = value;
+            if (hp<=0)
+            {
+                State = ZombieState.Dead;
+            }
+        }
     }
 
     private void Awake()
@@ -110,6 +121,7 @@ public class Zombie : MonoBehaviour
                 Attack(currGrid.CurrPlantBase);
                 break;
             case ZombieState.Dead:
+                Dead();
                 break;
         }
     }
@@ -145,11 +157,11 @@ public class Zombie : MonoBehaviour
     {
         isAttackState = true;
         // 植物的相关逻辑
-        StartCoroutine(DoHurt(plant));
+        StartCoroutine(DoHurtPlant(plant));
     }
 
     // 附伤害给植物
-    IEnumerator DoHurt(PlantBase plant)
+    IEnumerator DoHurtPlant(PlantBase plant)
     {
         // 植物的什么大于则扣血
         while (plant.Hp > 0)
@@ -160,5 +172,18 @@ public class Zombie : MonoBehaviour
 
         isAttackState = false;
         State = ZombieState.Walk;
+    }
+
+    // 自身受伤
+    public void Hurt(int attackValue)
+    {
+        Hp -= attackValue;
+    }
+
+    private void Dead()
+    {
+        // 告诉僵尸管理器，僵尸死了
+        ZombieManager.Instance.RemoveZombie(this);
+        Destroy(gameObject);
     }
 }

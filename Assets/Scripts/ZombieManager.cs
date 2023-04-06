@@ -17,6 +17,11 @@ public class ZombieManager : MonoBehaviour
     {
         zombies.Add(zombie);
     }
+    
+    public void RemoveZombie(Zombie zombie)
+    {
+        zombies.Remove(zombie);
+    }
 
     // 获取一个距离最近的僵尸
     public Zombie GetZombieByLineMinDistance(int lineNum, Vector3 pos)

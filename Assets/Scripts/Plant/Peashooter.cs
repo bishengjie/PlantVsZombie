@@ -19,6 +19,8 @@ public class Peashooter : PlantBase
     private bool canAttack = true;
     // 攻击的CD， 也就是攻击间隔
     private float attackCD = 1.4f;
+    // 攻击力
+    private int attackValue = 20;
     // 创建子弹的偏移量
     private Vector3 creatBulletoffsetPos = new Vector2(0.562f, 0.386f);
 
@@ -30,7 +32,7 @@ public class Peashooter : PlantBase
 
     private void Attack()
     {
-        if(canAttack==false)return;
+        if (canAttack == false) return;
         // 从僵尸管理器中获取一个最近的僵尸
         Zombie zombie = ZombieManager.Instance.GetZombieByLineMinDistance((int)currentGrid.Point.y, transform.position);
         // 没有僵尸 跳出
@@ -42,9 +44,11 @@ public class Peashooter : PlantBase
         // 在枪口实例化一个子弹
         Bullet bullet = Instantiate(GameManager.Instance.GameConf.Bullet1,
             transform.position + creatBulletoffsetPos, quaternion.identity, transform).GetComponent<Bullet>();
+        bullet.Init(attackValue);
         CDEnter();
         canAttack = false;
     }
+
     // 进入CD
     private void CDEnter()
     {
