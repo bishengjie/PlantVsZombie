@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public enum CardState
 {
     // 有阳光有CD
-    CanPlace,
+    CanPlant,
     // 有阳光没有CD
     NotCD,
     // 没有阳光有CD
@@ -51,9 +51,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private CardState cardState = CardState.NotAll;
 
-    public CardState CardState
-    {
-        get => cardState;
+    public CardState CardState { get => cardState;
         set
         {
             // 如果要修改成为的值和当前值一样， 就跳出，不需要运行任何逻辑
@@ -61,10 +59,9 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 return;
             }
-            cardState = value;
-            switch (CardState)
+            switch (value)
             {
-                case CardState.CanPlace:
+                case CardState.CanPlant:
                     // CD没有遮罩 自身是明亮的
                     maskImage.fillAmount = 0;
                     image.color = Color.white;
@@ -72,6 +69,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 case CardState.NotCD:
                     // CD有遮罩 自身是明亮的
                     image.color = Color.white;
+                    if (cardState == CardState.NotAll) return;
                     CDEnter();
                     break;
                 case CardState.NotSum:
@@ -81,9 +79,12 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     break;
                 case CardState.NotAll:
                     image.color = new Color(0.75f, 0.75f, 0.75f);
+                    if (cardState == CardState.NotCD) return;
                     CDEnter();
                     break;
             }
+
+            cardState = value;
         }
     }
 
@@ -197,7 +198,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // 有阳光 有CD
         if (canPlant && PlayerManager.Instance.SunNum >= WantSunNum)
         {
-            CardState = CardState.CanPlace;
+            CardState = CardState.CanPlant;
         }
         // 有阳光 没有CD
         else if (!canPlant && PlayerManager.Instance.SunNum >= WantSunNum)
