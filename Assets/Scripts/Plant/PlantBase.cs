@@ -43,6 +43,7 @@ public abstract  class PlantBase : MonoBehaviour
     // 放置时的初始化
     public void InitForPlace(Grid grid)
     {
+        hp = MaxHp;
         currentGrid = grid;
         currentGrid.CurrPlantBase = this;
         transform.position = grid.Position;

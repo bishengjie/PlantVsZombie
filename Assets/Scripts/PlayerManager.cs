@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;//委托
 
 public class PlayerManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerManager : MonoBehaviour
 
     // 阳光的数量
     private int sunNum = 100;
+    // 阳光数量更新时的事件
+    private UnityAction SunNumUpdateAction;
 
     public int SunNum
     {
@@ -17,6 +20,7 @@ public class PlayerManager : MonoBehaviour
         {
             sunNum = value;
             UIManager.Instance.UpdateSunNum(sunNum);
+            SunNumUpdateAction();
         }
     }
 
@@ -24,5 +28,11 @@ public class PlayerManager : MonoBehaviour
     {
         Instance = this;
 
+    }
+    
+    // 添加阳光数量更新时的事件监听
+    public void AddSunNumUpdateActionListener(UnityAction action)
+    {
+        SunNumUpdateAction += action;
     }
 }

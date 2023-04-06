@@ -1,14 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+// 卡片的四种状态
+public enum CardState
+{
+    // 有阳光有CD
+    CanPlace,
+    // 有阳光没有CD
+    NotCD,
+    // 没有阳光有CD
+    NotSum,
+    // 都没有
+    NotAll
+}
 public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     // 遮罩图片的img组件
     private Image maskImage;
+    // 自身的img组件
+    private Image image;
     // 需要阳光数量的text
     private Text wantSunText;
 
@@ -21,7 +36,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // 冷却时间：用于冷却时间的计算
     private float currTimeForCard;
 
-    // 是否可以放置植物
+    // 是否可以放置植物的CD
     private bool canPlant;
 
     // 是否需要放置植物
@@ -34,24 +49,51 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // 当前卡片所对应的植物类型
     public PlantType CardPlantType;
 
+    private CardState cardState = CardState.NotAll;
+
+    public CardState CardState
+    {
+        get => cardState;
+        set
+        {
+            // 如果要修改成为的值和当前值一样， 就跳出，不需要运行任何逻辑
+            if (cardState == value)
+            {
+                return;
+            }
+            cardState = value;
+            switch (CardState)
+            {
+                case CardState.CanPlace:
+                    // CD没有遮罩 自身是明亮的
+                    maskImage.fillAmount = 0;
+                    image.color = Color.white;
+                    break;
+                case CardState.NotCD:
+                    // CD有遮罩 自身是明亮的
+                    image.color = Color.white;
+                    CDEnter();
+                    break;
+                case CardState.NotSum:
+                    // CD没有遮罩 自身是昏暗的
+                    maskImage.fillAmount = 0;
+                    image.color = new Color(0.75f, 0.75f, 0.75f);
+                    break;
+                case CardState.NotAll:
+                    image.color = new Color(0.75f, 0.75f, 0.75f);
+                    CDEnter();
+                    break;
+            }
+        }
+    }
+
     public bool CanPlant
     {
         get => canPlant;
         set
         {
             canPlant = value;
-            // 如果不能放置
-            if (!canPlant)
-            {
-                // 完全遮罩来表示不可以种植
-                maskImage.fillAmount = 1;
-                // 开始冷却
-                CDEnter();
-            }
-            else
-            {
-                maskImage.fillAmount = 0;
-            }
+            CheckState();
         }
     }
 
@@ -85,7 +127,9 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         maskImage = transform.Find("Mask").GetComponent<Image>();
         wantSunText = transform.Find("Text ").GetComponent<Text >();
         wantSunText.text = WantSunNum.ToString();
-        CanPlant = false;
+        image = GetComponent<Image>();
+        CanPlant = true;
+        PlayerManager.Instance.AddSunNumUpdateActionListener(CheckState);
     }
     
     private  void Update()
@@ -147,9 +191,36 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
     }
 
+    // 状态检测
+    private void CheckState()
+    {
+        // 有阳光 有CD
+        if (canPlant && PlayerManager.Instance.SunNum >= WantSunNum)
+        {
+            CardState = CardState.CanPlace;
+        }
+        // 有阳光 没有CD
+        else if (!canPlant && PlayerManager.Instance.SunNum >= WantSunNum)
+        {
+            CardState = CardState.NotCD;
+        }
+        // 没有阳光 有CD
+        else if (canPlant && PlayerManager.Instance.SunNum < WantSunNum)
+        {
+            CardState = CardState.NotSum;
+        }
+        // 都没有
+        else 
+        {
+            CardState = CardState.NotAll;
+        }
+    }
+
     // 进入CD
     private void CDEnter()
     {
+        // 完全遮罩来表示不可以种植
+        maskImage.fillAmount = 1;
         // 遮罩后，开始计算冷却
         StartCoroutine(CalCD());
     }
