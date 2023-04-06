@@ -15,5 +15,9 @@ public class GameConf : ScriptableObject
      
      [Tooltip("豌豆射手")] 
      public GameObject Peashooter;
+     
+     [Header("子弹")]
+     [Tooltip("豌豆击中")] 
+     public Sprite Bullet1Hit;
 
 }
