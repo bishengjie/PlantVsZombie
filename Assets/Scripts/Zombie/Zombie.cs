@@ -58,6 +58,10 @@ public class Zombie : MonoBehaviour
             }
         }
     }
+    public Grid CurrGrid
+    {
+        get => currGrid;
+    }
 
     private void Awake()
     {
@@ -81,6 +85,7 @@ public class Zombie : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        ZombieManager.Instance.AddZombie(this);
     }
 
     void Update()

@@ -18,18 +18,21 @@ public enum CardState
     // 都没有
     NotAll
 }
+
 public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     // 遮罩图片的img组件
     private Image maskImage;
+
     // 自身的img组件
     private Image image;
+
     // 需要阳光数量的text
     private Text wantSunText;
 
     // 种植需要多少阳光
     public int WantSunNum;
-    
+
     // 冷却时间：几秒可以放置一次植物
     public float CDTime;
 
@@ -41,17 +44,21 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     // 是否需要放置植物
     private bool wantPlant;
+
     // 用来创建的植物
     private PlantBase plant;
+
     // 在网格中的植物，它是透明的
     private PlantBase plantInGrid;
-    
+
     // 当前卡片所对应的植物类型
     public PlantType CardPlantType;
 
     private CardState cardState = CardState.NotAll;
 
-    public CardState CardState { get => cardState;
+    public CardState CardState
+    {
+        get => cardState;
         set
         {
             // 如果要修改成为的值和当前值一样， 就跳出，不需要运行任何逻辑
@@ -59,6 +66,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 return;
             }
+
             switch (value)
             {
                 case CardState.CanPlant:
@@ -83,7 +91,6 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     CDEnter();
                     break;
             }
-
             cardState = value;
         }
     }
@@ -126,14 +133,14 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void Start()
     {
         maskImage = transform.Find("Mask").GetComponent<Image>();
-        wantSunText = transform.Find("Text ").GetComponent<Text >();
+        wantSunText = transform.Find("Text ").GetComponent<Text>();
         wantSunText.text = WantSunNum.ToString();
         image = GetComponent<Image>();
         CanPlant = true;
         PlayerManager.Instance.AddSunNumUpdateActionListener(CheckState);
     }
-    
-    private  void Update()
+
+    private void Update()
     {
         // 如果需要放置植物，并且要放置的植物不为空
         if (WantPlant && plant != null)
@@ -141,15 +148,17 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             // 让植物跟随鼠标
             Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Grid grid = GridManager.Instance.GetGridByWorldPos(mousePoint);
-            
+
             plant.transform.position = new Vector3(mousePoint.x, mousePoint.y, 0);
-            
+
             // 如果距离网格较近，并且没有植物，需要在网格上出现一个透明的植物
             if (grid.HavePlant == false && Vector2.Distance(mousePoint, grid.Position) < 1.5)
             {
                 if (plantInGrid == null)
                 {
-                    plantInGrid = Instantiate(plant.gameObject, grid.Position, Quaternion.identity, PlantManager.Instance.transform).GetComponent<PlantBase>();
+                    plantInGrid =
+                        Instantiate(plant.gameObject, grid.Position, Quaternion.identity,
+                            PlantManager.Instance.transform).GetComponent<PlantBase>();
                     plantInGrid.InitForCreate(true);
                 }
                 else
@@ -181,11 +190,12 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 }
             }
         }
+
         // 如果右键取消放置状态
         if (Input.GetMouseButtonDown(1)) //0
         {
-            if (plant!=null) Destroy(plant.gameObject);
-            if (plantInGrid!=null) Destroy(plantInGrid.gameObject);
+            if (plant != null) Destroy(plant.gameObject);
+            if (plantInGrid != null) Destroy(plantInGrid.gameObject);
             plant = null;
             plantInGrid = null;
             WantPlant = false;
@@ -211,7 +221,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             CardState = CardState.NotSum;
         }
         // 都没有
-        else 
+        else
         {
             CardState = CardState.NotAll;
         }
@@ -241,28 +251,29 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // 到这里，意味着冷却时间到了，可以放置了
         CanPlant = true;
     }
-   
+
     // 鼠标移入
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!CanPlant) return;
+        if (CardState != CardState.CanPlant) return;
         transform.localScale = new Vector2(1.05f, 1.05f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!CanPlant) return;
+        if (CardState != CardState.CanPlant) return;
         transform.localScale = new Vector2(1f, 1f);
     }
 
     // 鼠标点击时的效果，放置植物
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!CanPlant) return;
+        if (CardState != CardState.CanPlant) return;
         if (!WantPlant)
         {
             WantPlant = true;
         }
+
         print("放置植物");
     }
 }

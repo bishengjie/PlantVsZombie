@@ -16,3 +16,4 @@ MonoBehaviour:
   SunFlower: {fileID: 6573398450271479225, guid: 3658e97cb81bf9c4d88e420f6fdb947a, type: 3}
   Peashooter: {fileID: 5927592771599986669, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
   Bullet1Hit: {fileID: 21300000, guid: 872c6bd918b1246408971b9b325ebcc6, type: 3}
+  Bullet1: {fileID: 2084582800634217076, guid: a9bc23fbc3235454982e498279566189, type: 3}

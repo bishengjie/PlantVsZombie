@@ -19,5 +19,8 @@ public class GameConf : ScriptableObject
      [Header("子弹")]
      [Tooltip("豌豆击中")] 
      public Sprite Bullet1Hit;
+     
+     [Tooltip("子弹")] 
+     public GameObject Bullet1;
 
 }
