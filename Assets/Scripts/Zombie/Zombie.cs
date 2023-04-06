@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -35,6 +36,9 @@ public class Zombie : MonoBehaviour
 
     // 行走动画的名称，随机来
     private string walkAnimationStr;
+    
+       // 攻击动画的名称
+    private string attackAnimationStr;
 
     // 修改状态会直接改变动画
     public ZombieState State { get => state;
@@ -55,6 +59,10 @@ public class Zombie : MonoBehaviour
                 // 头掉
                 isLostHead = true;
                 walkAnimationStr =  "Zombie_LostHead";
+                attackAnimationStr =  "Zombie_LostHeadAttack";
+                // 创建一个人
+                GameObject.Instantiate(GameManager.Instance.GameConf.Zombie_Head, animator.transform.position,
+                    quaternion.identity,null);
                 // 状态检测
                 CheckState();
                 
@@ -82,6 +90,7 @@ public class Zombie : MonoBehaviour
                 break;
         }
 
+        attackAnimationStr = "Zombie_Attack";
         GetGridByVerticalNum(0);
     }
 
@@ -107,7 +116,7 @@ public class Zombie : MonoBehaviour
                 animator.speed = 0;
                 break;
             case ZombieState.Walk:
-                animator.Play(walkAnimationStr);
+                animator.Play(walkAnimationStr,0,animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
                 animator.speed = 1;
                 break;
             case ZombieState.Attack:

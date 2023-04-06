@@ -32,7 +32,7 @@ public class Peashooter : PlantBase
 
     private void Attack()
     {
-        if (canAttack == false) return;
+        if(canAttack==false)return;
         // 从僵尸管理器中获取一个最近的僵尸
         Zombie zombie = ZombieManager.Instance.GetZombieByLineMinDistance((int)currentGrid.Point.y, transform.position);
         // 没有僵尸 跳出
@@ -44,11 +44,10 @@ public class Peashooter : PlantBase
         // 在枪口实例化一个子弹
         Bullet bullet = Instantiate(GameManager.Instance.GameConf.Bullet1,
             transform.position + creatBulletoffsetPos, quaternion.identity, transform).GetComponent<Bullet>();
-        bullet.Init(attackValue);
+       bullet.Init(attackValue);
         CDEnter();
         canAttack = false;
     }
-
     // 进入CD
     private void CDEnter()
     {

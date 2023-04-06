@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7341836441323119462}
   - component: {fileID: 7341836441323119461}
   - component: {fileID: 7341836441323119460}
+  - component: {fileID: 1568259194320009898}
   m_Layer: 0
   m_Name: Zombie_Head
   m_TagString: Untagged
@@ -105,3 +106,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1568259194320009898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341836441323119467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4122d4c2aba28a745be964e3485c958f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
