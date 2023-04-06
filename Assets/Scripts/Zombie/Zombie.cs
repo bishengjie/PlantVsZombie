@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public enum ZombieState
@@ -18,6 +19,7 @@ public class Zombie : MonoBehaviour
     // 我的状态
     private ZombieState state;
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private Grid currGrid;
 
     // 生命值
@@ -91,13 +93,15 @@ public class Zombie : MonoBehaviour
         }
 
         attackAnimationStr = "Zombie_Attack";
-        GetGridByVerticalNum(0);
+       
     }
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         ZombieManager.Instance.AddZombie(this);
+        GetGridByVerticalNum(Random.Range(0,2));
     }
 
     void Update()
@@ -201,6 +205,7 @@ public class Zombie : MonoBehaviour
     public void Hurt(int attackValue)
     {
         Hp -= attackValue;
+        StartCoroutine(ColorEF(0.2f, new Color(0.4f, 0.4f, 0.4f), 0.05f, null));
     }
 
     private void Dead()
@@ -208,5 +213,22 @@ public class Zombie : MonoBehaviour
         // 告诉僵尸管理器，僵尸死了
         ZombieManager.Instance.RemoveZombie(this);
         Destroy(gameObject);
+    }
+    // 颜色变化效果
+    protected IEnumerator ColorEF(float wantTime, Color targetColor, float delayTime, UnityAction fun)
+    {
+        float currentTime = 0;
+        float lerp;
+        while (currentTime < wantTime)
+        {
+            yield return new WaitForSeconds(delayTime);
+            lerp = currentTime / wantTime;
+            currentTime += delayTime;
+            spriteRenderer.color = Color.Lerp(Color.white, targetColor, lerp);
+
+        }
+
+        spriteRenderer.color = Color.white;
+        if (fun != null) fun();
     }
 }
