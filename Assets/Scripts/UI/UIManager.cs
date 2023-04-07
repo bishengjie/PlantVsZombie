@@ -10,7 +10,21 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     private Text SunNumText;
-  
+
+    private UIPlantCard currCard;
+    public UIPlantCard CurrCard
+    {
+        get => currCard;
+        set
+        {
+            // 置空上一个卡片的状态
+            // if (currCard!=null)
+            // {
+            //     currCard.WantPlant = false;
+            // }
+            currCard = value;
+        }
+    }
     private void Awake()
     {
         Instance = this;

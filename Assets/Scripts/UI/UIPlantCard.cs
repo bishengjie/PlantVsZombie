@@ -120,6 +120,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 plant = PoolManager.Instance.GetObj(prefab).GetComponent<PlantBase>();
                 plant.transform.SetParent( PlantManager.Instance.transform);
                 plant.InitForCreate(false,CardPlantType,Vector2.zero);
+               // UIManager.Instance.CurrCard = this;
             }
             else
             {
