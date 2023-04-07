@@ -13,21 +13,24 @@ public abstract  class PlantBase : MonoBehaviour
     // 当前植物所在的网格
     protected Grid currentGrid;
     protected float hp;
+    protected PlantType plantType;
 
     public float Hp { get => hp; }
     public abstract float MaxHp { get ; }
     
-    // 寻找自身相关组件
-    protected void Find()
+    // 任何情况的的通用初始化
+    protected void InitForAll(PlantType type)
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        this.plantType = type;
     }
   
     // 创建时的初始化
-    public void InitForCreate(bool inGrid)
+    public void InitForCreate(bool inGrid,PlantType type,Vector2 pos)
     {
-        Find();
+        transform.position = pos;
+        InitForAll(type);
         animator.speed = 0;
         if (inGrid)
         {
@@ -36,13 +39,16 @@ public abstract  class PlantBase : MonoBehaviour
         }
         else
         {
+           // spriteRenderer.color = new Color(1,1,1,1);
             spriteRenderer.sortingOrder = 1;
         }
     }
     
     // 放置时的初始化
-    public void InitForPlace(Grid grid)
+    public void InitForPlace(Grid grid,PlantType type)
     {
+        InitForAll(type);
+       // spriteRenderer.color = new Color(1,1,1,1);
         hp = MaxHp;
         currentGrid = grid;
         currentGrid.CurrPlantBase = this;
@@ -87,10 +93,15 @@ public abstract  class PlantBase : MonoBehaviour
         if (fun != null) fun();
     }
 
-    private void Dead()
+    public void Dead()
     {
-        currentGrid.CurrPlantBase = null;
-        Destroy(gameObject);
+        if (currentGrid != null)
+        {
+            currentGrid.CurrPlantBase = null;
+        }
+        StopAllCoroutines();
+        CancelInvoke();
+        PoolManager.Instance.PushObj(PlantManager.Instance.GetPlantByType(plantType),gameObject);
     }
     protected virtual void OnInitForPlace()
     {

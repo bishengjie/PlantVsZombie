@@ -18,7 +18,7 @@ public class PlantManager : MonoBehaviour
           Instance = this;
      }
 
-     public GameObject GetPlantForType(PlantType type)
+     public GameObject GetPlantByType(PlantType type)
      {
           switch (type)
           {

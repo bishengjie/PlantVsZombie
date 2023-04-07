@@ -41,6 +41,9 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     // 是否可以放置植物的CD
     private bool canPlant;
+    
+    // 植物的预制体
+    private GameObject prefab;
 
     // 是否需要放置植物
     private bool wantPlant;
@@ -113,17 +116,16 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             wantPlant = value;
             if (wantPlant)
             {
-                GameObject prefab = PlantManager.Instance.GetPlantForType(CardPlantType);
-                // print(prefab);//null
-                plant = Instantiate(prefab, Vector3.zero, Quaternion.identity, PlantManager.Instance.transform)
-                    .GetComponent<PlantBase>();
-                plant.InitForCreate(false);
+                prefab = PlantManager.Instance.GetPlantByType(CardPlantType);
+                plant = PoolManager.Instance.GetObj(prefab).GetComponent<PlantBase>();
+                plant.transform.SetParent( PlantManager.Instance.transform);
+                plant.InitForCreate(false,CardPlantType,Vector2.zero);
             }
             else
             {
                 if (plant != null)
                 {
-                    Destroy(plant.gameObject);
+                    plant.Dead();
                     plant = null;
                 }
             }
@@ -156,10 +158,9 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 if (plantInGrid == null)
                 {
-                    plantInGrid =
-                        Instantiate(plant.gameObject, grid.Position, Quaternion.identity,
-                            PlantManager.Instance.transform).GetComponent<PlantBase>();
-                    plantInGrid.InitForCreate(true);
+                    plantInGrid = PoolManager.Instance.GetObj(prefab).GetComponent<PlantBase>();
+                    plantInGrid.transform.SetParent(PlantManager.Instance.transform);
+                    plantInGrid.InitForCreate(true,CardPlantType,grid.Position);
                 }
                 else
                 {
@@ -170,10 +171,9 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 if (Input.GetMouseButtonDown(0)) //0
                 {
                     plant.transform.position = grid.Position;
-                    plant.InitForPlace(grid);
+                    plant.InitForPlace(grid,CardPlantType);
                     plant = null;
-                    //
-                    Destroy(plantInGrid.gameObject);
+                    plantInGrid.Dead();
                     plantInGrid = null;
                     WantPlant = false;
                     CanPlant = false;
@@ -185,7 +185,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 if (plantInGrid != null)
                 {
-                    Destroy(plantInGrid.gameObject);
+                    plantInGrid.Dead();
                     plantInGrid = null;
                 }
             }
@@ -194,8 +194,8 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // 如果右键取消放置状态
         if (Input.GetMouseButtonDown(1)) //0
         {
-            if (plant != null) Destroy(plant.gameObject);
-            if (plantInGrid != null) Destroy(plantInGrid.gameObject);
+            if (plant != null) plantInGrid.Dead();
+            if (plantInGrid != null) plantInGrid.Dead();
             plant = null;
             plantInGrid = null;
             WantPlant = false;
