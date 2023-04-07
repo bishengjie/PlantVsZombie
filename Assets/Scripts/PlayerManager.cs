@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;//委托
 
@@ -20,7 +21,7 @@ public class PlayerManager : MonoBehaviour
         {
             sunNum = value;
             UIManager.Instance.UpdateSunNum(sunNum);
-            SunNumUpdateAction();
+            if(SunNumUpdateAction!=null) SunNumUpdateAction();
         }
     }
 

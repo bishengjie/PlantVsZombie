@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     private Text SunNumText;
+    private GameObject mainPanel;
 
     private UIPlantCard currCard;
     public UIPlantCard CurrCard
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        mainPanel = transform.Find("MainPanel").gameObject;
         SunNumText = transform.Find("MainPanel/SunNumText").GetComponent<Text>();
     }
 
@@ -46,5 +48,10 @@ public class UIManager : MonoBehaviour
     public Vector3 GetSunNumTextPos()
     {
         return SunNumText.transform.position;
+    }
+    // 设置主面板的显示
+    public void SetmainPanelActive(bool isShow)
+    {
+        mainPanel.SetActive(isShow);
     }
 }
