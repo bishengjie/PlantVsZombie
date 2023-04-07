@@ -19,3 +19,4 @@ MonoBehaviour:
   Zombie: {fileID: 3414327221192055382, guid: 56691f7f985d66647a9b44639a089540, type: 3}
   Bullet1Hit: {fileID: 21300000, guid: 872c6bd918b1246408971b9b325ebcc6, type: 3}
   Bullet1: {fileID: 2084582800634217076, guid: a9bc23fbc3235454982e498279566189, type: 3}
+  Bullet1Nor: {fileID: 21300000, guid: b6372bc55a4872d40b4c342c28337821, type: 3}

@@ -10,13 +10,19 @@ public class Bullet : MonoBehaviour
     // 攻击力
     private int attackValue;
     // 是否击中
-    private bool isHit = false;
-    public void Init(int attackValue)
+    private bool isHit;
+    public void Init(int attackValue,Vector2 pos)
     {
+        transform.position = pos;
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody.AddForce(Vector2.right * 300);
         this.attackValue = attackValue;
+        
+        isHit = false;
+        // 修改成正常状态的图片
+        spriteRenderer.sprite = GameManager.Instance.GameConf.Bullet1Nor;
+
 
     }
 
@@ -48,6 +54,9 @@ public class Bullet : MonoBehaviour
 
     private void Destroy()
     {
-        Destroy(gameObject);
+        // 取消延迟调用
+        CancelInvoke();
+        // 把自己放进缓存池
+        PoolManager.Instance.PushObj(GameManager.Instance.GameConf.Bullet1,gameObject);
     }
 }
