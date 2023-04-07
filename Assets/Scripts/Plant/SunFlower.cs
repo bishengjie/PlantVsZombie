@@ -30,9 +30,9 @@ public class SunFlower : PlantBase
 
     private void InstantiateSun()
     {
-        Sun sun = Instantiate(GameManager.Instance.GameConf.Sun, transform.position, Quaternion.identity, transform)
-            .GetComponent<Sun>();
+        Sun sun = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Sun).GetComponent<Sun>();
+        sun.transform.SetParent(transform);
         // 让阳光进行跳跃动画
-        sun.JumpAnimation();
+        sun.InitForSunFlower(transform.position);
     }
 }

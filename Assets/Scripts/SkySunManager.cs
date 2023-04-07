@@ -18,7 +18,6 @@ public class SkySunManager : MonoBehaviour
 
     void Start()
     {
-
         InvokeRepeating("CreateSun", 3, 3);
     }
 
@@ -27,7 +26,8 @@ public class SkySunManager : MonoBehaviour
     // 在天空中生成阳光
     void CreateSun()
     {
-        Sun sun = Instantiate(GameManager.Instance.GameConf.Sun, Vector3.zero, Quaternion.identity, transform).GetComponent<Sun>();
+        Sun sun = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Sun).GetComponent<Sun>();
+        sun.transform.SetParent(transform);
         float downY = Random.Range(sunDownMinPosY, sunDownMaxPosY);
         float createX = Random.Range(createSunMinPosX, createSunMaxPosX);
         sun.InitForSky(downY, createX, createSunPosY);

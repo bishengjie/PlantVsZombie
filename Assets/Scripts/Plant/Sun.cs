@@ -4,18 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 public class Sun : MonoBehaviour
 {
     // 下落的目标点
     private float downTargetPosY; 
     // 来自天空
     public bool isFormSky;
-    void Start()
-    {
-        
-    }
-
+   
     // Update is called once per frame
     void Update()
     {
@@ -40,9 +35,19 @@ public class Sun : MonoBehaviour
         FlyAnimation(sunNum);
         
     }
-    // 跳跃动画
-    public void JumpAnimation()
+    
+    // 当阳光从天空中初始化的方法
+    public void InitForSky(float downTargetPosY,float createPosX,float CreatePosY)
     {
+        this.downTargetPosY = downTargetPosY;
+        transform.position = new Vector2(createPosX, CreatePosY);
+        isFormSky = true;
+    }
+    
+    //阳光来自太阳花的初始化
+    public void InitForSunFlower(Vector2 pos)
+    {
+        transform.position = pos;
         // 肯定来自太阳花
         isFormSky = false;
         StartCoroutine(DoJump());
@@ -89,9 +94,6 @@ public class Sun : MonoBehaviour
 
     private IEnumerator DoFly(Vector3 pos)
     {
-        // pos 终点
-        // 500
-        
         while (Vector3.Distance(pos, transform.position) > 0.05f)
         {
             Vector3 direction = (pos - transform.position).normalized*0.05f;
@@ -106,14 +108,11 @@ public class Sun : MonoBehaviour
     // 销毁
     private void DestroySun()
     {
-       Destroy(gameObject);
+        // 取消自身全部协程和延迟调用
+        StopAllCoroutines();
+        CancelInvoke();
+       // 放进缓存池， 不做真实销毁
+       PoolManager.Instance.PushObj(GameManager.Instance.GameConf.Sun,gameObject);
     }
 
-    // 当阳光从天空中初始化的方法
-    public void InitForSky(float downTargetPosY,float createPosX,float CreatePosY)
-    {
-        this.downTargetPosY = downTargetPosY;
-        transform.position = new Vector2(createPosX, CreatePosY);
-        isFormSky = true;
-    }
 }
