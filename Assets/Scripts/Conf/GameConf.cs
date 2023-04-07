@@ -19,6 +19,8 @@ public class GameConf : ScriptableObject
      [Header("僵尸")]
      [Tooltip("僵尸的头")] 
      public GameObject Zombie_Head;
+     [Tooltip("普通僵尸")] 
+     public GameObject Zombie;
      
      [Header("子弹")]
      [Tooltip("豌豆击中")] 

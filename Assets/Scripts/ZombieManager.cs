@@ -7,12 +7,41 @@ public class ZombieManager : MonoBehaviour
 {
     public static ZombieManager Instance;
     private List<Zombie> zombies = new List<Zombie>();
-
+    private int currOrderNum = 0;
+    public int CurrOrderNum
+    {
+        get => currOrderNum;
+        set
+        {
+            currOrderNum = value;
+            if (value>50)
+            {
+                currOrderNum = 0;
+            }
+        } 
+    }
     private void Awake()
     {
         Instance = this;
     }
 
+    private void Start()
+    {
+        CreateZombie(0);
+        CreateZombie(1);
+        CreateZombie(2);
+        CreateZombie(3);
+    }
+
+    // 创建僵尸
+    private void CreateZombie(int lineNum)
+    {
+        Zombie zombie =Instantiate(GameManager.Instance.GameConf.Zombie,new Vector3(8f,0,0), Quaternion.identity, transform).GetComponent<Zombie>();
+        AddZombie(zombie);
+        zombie.Init(lineNum,CurrOrderNum);
+        CurrOrderNum++;
+    }
+    
     public void AddZombie(Zombie zombie)
     {
         zombies.Add(zombie);

@@ -76,7 +76,45 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void Init(int lineNum,int orderNum)
+    {
+        InitAnimationName();
+        Find();
+        GetGridByVerticalNum(lineNum);
+        CheckOrder(orderNum);
+    }
+    
+    // 检查排序
+    private void CheckOrder(int orderNum)
+    {
+        // 在草坪上，越靠近0越大，反之越小
+        // 0层是最大的（400~499） 4层是最小的（0~99）
+        int startNum = 0;
+        switch ((int)CurrGrid.Point.y)
+        {
+            case 0:
+                startNum = 400;
+                break;
+            case 1:
+                startNum = 300;
+                break;
+            case 2:
+                startNum = 200;
+                break;
+            case 3:
+                startNum = 100;
+                break;
+            case 4:
+                startNum = 0;
+                break;
+        }
+
+        spriteRenderer.sortingOrder = startNum + orderNum;
+
+    }
+    
+    // 初始化动画名称
+    private void InitAnimationName()
     {
         int rangeWalk = Random.Range(1, 4);
         switch (rangeWalk)
@@ -96,12 +134,11 @@ public class Zombie : MonoBehaviour
        
     }
 
-    void Start()
+    void Find()
     {
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        ZombieManager.Instance.AddZombie(this);
-        GetGridByVerticalNum(Random.Range(0,2));
+        
     }
 
     void Update()
