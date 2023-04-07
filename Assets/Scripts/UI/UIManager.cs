@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
         get => currCard;
         set
         {
+            // if(currCard==value)return;//
             // 置空上一个卡片的状态
             // if (currCard!=null)
             // {
