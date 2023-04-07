@@ -62,9 +62,9 @@ public class Zombie : MonoBehaviour
                 isLostHead = true;
                 walkAnimationStr =  "Zombie_LostHead";
                 attackAnimationStr =  "Zombie_LostHeadAttack";
-                // 创建一个人
-                GameObject.Instantiate(GameManager.Instance.GameConf.Zombie_Head, animator.transform.position,
-                    quaternion.identity,null);
+                // 创建一个头
+                Zombie_Head head=PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Zombie_Head).GetComponent<Zombie_Head>();
+                head.Init(animator.transform.position);
                 // 状态检测
                 CheckState();
                 
