@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager
 {
     private static PoolManager instance;
 
@@ -22,7 +22,7 @@ public class PoolManager : MonoBehaviour
    
    // Key是预制体
    // Value是具体的Obj
-   private Dictionary<GameObject, List<GameObject>> poolDataDic = new Dictionary<GameObject, List<GameObject>>();
+   private Dictionary<GameObject, List<GameObject>> poolDataDic = new();
    
    // 获取物体
    public GameObject GetObj(GameObject prefab)
@@ -40,33 +40,41 @@ public class PoolManager : MonoBehaviour
        else
        {
            // 实例化一个，然后传过去
-           obj = GameObject.Instantiate(prefab);
+           obj = Object.Instantiate(prefab);
        }
        // 传出去之前，让它显示
        obj.SetActive(true);
        // 让其没有父物体
        obj.transform.SetParent(null);
        return obj;
-
    }
    
    //把物体放进缓存池
    public void PushObj(GameObject prefab, GameObject obj)
    {
        // 判断有没有根目录
-       if (poolObj == null) poolObj = new GameObject("PoolObj");
+       if (poolObj == null) 
+       {
+           poolObj = new GameObject("PoolObj");
+       }
        // 判断字典中没有这个预制体的数据
        if (poolDataDic.ContainsKey(prefab))
        {
            // 把物体放进去
            poolDataDic[prefab].Add(obj);
-
        }
        //字典中没有
        else
        {
-           // 创建这个预制体的缓存池数据
-           poolDataDic.Add(prefab, new List<GameObject>() { obj });
+
+           // 创建这个预制体的缓存池数据 1+2+3=5  1+2+4=5  
+           List<GameObject> pool = new(){obj}; //1
+            pool.Add(obj); //2
+           poolDataDic[prefab] = pool; // 3
+           poolDataDic.Add(prefab,pool); //4
+           //  prefab: [obj]
+           //     key : value
+           poolDataDic.Add(prefab, new List<GameObject> { obj });//5= poolDataDic.Add(prefab, new List<GameObject>{obj});
        }
 
        //如果根目录下没有这个预制体命名的子物体
@@ -86,15 +94,4 @@ public class PoolManager : MonoBehaviour
    {
        poolDataDic.Clear();
    }
-
-   void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
