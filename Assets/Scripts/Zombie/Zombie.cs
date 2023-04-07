@@ -31,7 +31,7 @@ public class Zombie : MonoBehaviour
     private bool isAttackState;
     
     // 是否已经失去头
-    private bool isLostHead = false;
+    private bool isLostHead;
 
     // 攻击力
     private float attackValue = 100;
@@ -76,12 +76,16 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    public void Init(int lineNum,int orderNum)
+    public void Init(int lineNum,int orderNum,Vector2 pos)
     {
+        hp = 270;
+        isLostHead = false;
+        transform.position = pos;
         InitAnimationName();
         Find();
         GetGridByVerticalNum(lineNum);
         CheckOrder(orderNum);
+        State = ZombieState.Idel;
     }
     
     // 检查排序
@@ -228,7 +232,7 @@ public class Zombie : MonoBehaviour
     IEnumerator DoHurtPlant(PlantBase plant)
     {
         // 植物的什么大于则扣血
-        while (plant.Hp > 0)
+        while (plant != null && plant.Hp > 0)
         {
             plant.Hurt(attackValue / 5);
             yield return new WaitForSeconds(0.2f);
@@ -249,7 +253,9 @@ public class Zombie : MonoBehaviour
     {
         // 告诉僵尸管理器，僵尸死了
         ZombieManager.Instance.RemoveZombie(this);
-        Destroy(gameObject);
+        StopAllCoroutines();
+        currGrid = null;
+        PoolManager.Instance.PushObj(GameManager.Instance.GameConf.Zombie,gameObject);
     }
     // 颜色变化效果
     protected IEnumerator ColorEF(float wantTime, Color targetColor, float delayTime, UnityAction fun)
