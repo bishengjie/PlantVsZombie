@@ -31,4 +31,14 @@ public class SkySunManager : MonoBehaviour
     {
         CancelInvoke();
     }
+    
+    // 在天空中生成阳光
+    void CreateSun()
+    {
+        Sun sun = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Sun).GetComponent<Sun>();
+        sun.transform.SetParent(transform);
+        float downY = Random.Range(sunDownMinPosY, sunDownMaxPosY);
+        float createX = Random.Range(createSunMinPosX, createSunMaxPosX);
+        sun.InitForSky(downY, createX, createSunPosY);
+    }
 }
