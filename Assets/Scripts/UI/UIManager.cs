@@ -11,8 +11,9 @@ public class UIManager : MonoBehaviour
     private Text SunNumText;
     // 显示面板
     private GameObject mainPanel;
-
+    // 当前的植物卡片
     private UIPlantCard currCard;
+    private LVStartEF LVStartEF;
     public UIPlantCard CurrCard
     {
         get => currCard;
@@ -32,6 +33,7 @@ public class UIManager : MonoBehaviour
         Instance = this;
         mainPanel = transform.Find("MainPanel").gameObject;
         SunNumText = transform.Find("MainPanel/SunNumText").GetComponent<Text>();
+        LVStartEF = transform.Find("LVStartEF").GetComponent<LVStartEF>();
     }
 
     // 更新阳光的数字
@@ -49,5 +51,11 @@ public class UIManager : MonoBehaviour
     public void SetmainPanelActive(bool isShow)
     {
         mainPanel.SetActive(isShow);
+    }
+    
+   // 显示关卡开始时的效果
+    public void ShowLVStartEF()
+    {
+        LVStartEF.Show();
     }
 }

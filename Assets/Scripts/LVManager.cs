@@ -58,6 +58,8 @@ public class LVManager : MonoBehaviour
     {
         // 让阳光开始创建
         SkySunManager.Instance.StartCreateSun(6);
+        // 开始显示UI特效
+        UIManager.Instance.ShowLVStartEF();
         // 清理掉僵尸
         ZombieManager.Instance.ClearZombie();
         CurrLVState = LVState.Fight;
