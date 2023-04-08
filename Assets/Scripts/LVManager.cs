@@ -25,14 +25,17 @@ public class LVManager : MonoBehaviour
             switch (currLVState)
             {
                 case LVState.Start:
-                    // 隐藏UI面板
+                    // 隐藏UI主面板
                     UIManager.Instance.SetmainPanelActive(false);
+                    //刷新僵尸秀的僵尸
+                    ZombieManager.Instance.UpdateZombie(5);
                     // 摄像机移动到右侧观察关卡僵尸
-                    Camera_C.Instance.MoveForLVStart();
-                    // 移回左侧 并显示UI
-                    // 切换到战斗模式
+                    Camera_C.Instance.StartMove(LVStartCameraBackAction);
                     break;
                 case LVState.Fight:
+                    // 显示主面板
+                    UIManager.Instance.SetmainPanelActive(true);
+                    // 重新刷新僵尸，根据关卡难度
                     break;
                 case LVState.Over:
                     break;
@@ -50,4 +53,13 @@ public class LVManager : MonoBehaviour
         CurrLVState = LVState.Start;
     }
 
+    // 关卡开始时 摄像机回归后要执行的方法
+    private void LVStartCameraBackAction()
+    {
+        // 让阳光开始创建
+        SkySunManager.Instance.StartCreateSun(6);
+        // 清理掉僵尸
+        ZombieManager.Instance.ClearZombie();
+        CurrLVState = LVState.Fight;
+    }
 }

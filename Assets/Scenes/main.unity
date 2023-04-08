@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WantSunNum: 0
   CDTime: 0
-  CardPlantType: 0
+  CardPlantType: 1
 --- !u!114 &133074598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -584,13 +585,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2, y: 0, z: -10}
+  m_LocalPosition: {x: -3, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c874479a799c2c4489d6bb6f33ddcbc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &552153518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WantSunNum: 0
   CDTime: 0
-  CardPlantType: 0
+  CardPlantType: 1
 --- !u!114 &918573308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,7 +1359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WantSunNum: 0
   CDTime: 0
-  CardPlantType: 0
+  CardPlantType: 1
 --- !u!114 &1012384925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,6 +1567,7 @@ GameObject:
   - component: {fileID: 1207223727}
   - component: {fileID: 1207223728}
   - component: {fileID: 1207223729}
+  - component: {fileID: 1207223730}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1622,6 +1636,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d730acca543eef42b6d3fe040078abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1207223730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207223722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32f7d87d3fa9974f9c5c184a9b23d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1244704559
@@ -1989,7 +2015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WantSunNum: 0
   CDTime: 0
-  CardPlantType: 0
+  CardPlantType: 1
 --- !u!114 &1572434122
 MonoBehaviour:
   m_ObjectHideFlags: 0

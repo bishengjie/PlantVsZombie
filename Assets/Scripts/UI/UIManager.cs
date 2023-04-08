@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-
     private Text SunNumText;
+    // 显示面板
     private GameObject mainPanel;
 
     private UIPlantCard currCard;
@@ -32,11 +32,6 @@ public class UIManager : MonoBehaviour
         Instance = this;
         mainPanel = transform.Find("MainPanel").gameObject;
         SunNumText = transform.Find("MainPanel/SunNumText").GetComponent<Text>();
-    }
-
-    void Start()
-    {
-       
     }
 
     // 更新阳光的数字

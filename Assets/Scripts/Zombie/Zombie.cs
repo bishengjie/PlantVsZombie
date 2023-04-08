@@ -55,21 +55,25 @@ public class Zombie : MonoBehaviour
     public int Hp
     {
         get => hp;
-        set { hp = value;
-            if (hp <= 90&&!isLostHead)
+        set
+        {
+            hp = value;
+            if (hp <= 90 && !isLostHead)
             {
                 // 头掉
                 isLostHead = true;
-                walkAnimationStr =  "Zombie_LostHead";
-                attackAnimationStr =  "Zombie_LostHeadAttack";
+                walkAnimationStr = "Zombie_LostHead";
+                attackAnimationStr = "Zombie_LostHeadAttack";
                 // 创建一个头
-                Zombie_Head head=PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Zombie_Head).GetComponent<Zombie_Head>();
+                Zombie_Head head = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Zombie_Head)
+                    .GetComponent<Zombie_Head>();
                 head.Init(animator.transform.position);
                 // 状态检测
                 CheckState();
-                
+
             }
-            if (hp<=0)
+
+            if (hp <= 0)
             {
                 State = ZombieState.Dead;
             }
@@ -249,7 +253,7 @@ public class Zombie : MonoBehaviour
         StartCoroutine(ColorEF(0.2f, new Color(0.4f, 0.4f, 0.4f), 0.05f, null));
     }
 
-    private void Dead()
+    public void Dead()
     {
         // 告诉僵尸管理器，僵尸死了
         ZombieManager.Instance.RemoveZombie(this);

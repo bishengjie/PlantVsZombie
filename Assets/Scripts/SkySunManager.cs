@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SkySunManager : MonoBehaviour
 {
+    public static SkySunManager Instance;
 
     // 创建阳光时的坐标
     private float createSunPosY = 6;
@@ -14,22 +15,20 @@ public class SkySunManager : MonoBehaviour
 
     // 阳光下落时 最高和最低的Y轴坐标，在这个范围内随机
     private float sunDownMaxPosY = 2.5f;
-    private float sunDownMinPosY = -4.7f;
+    private float sunDownMinPosY = -3.7f; 
 
-    void Start()
+    private void Awake()
     {
-        InvokeRepeating("CreateSun", 3, 3);
+        Instance = this;
     }
 
-
-
-    // 在天空中生成阳光
-    void CreateSun()
+    public void StartCreateSun(float delay) // 延迟
     {
-        Sun sun = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Sun).GetComponent<Sun>();
-        sun.transform.SetParent(transform);
-        float downY = Random.Range(sunDownMinPosY, sunDownMaxPosY);
-        float createX = Random.Range(createSunMinPosX, createSunMaxPosX);
-        sun.InitForSky(downY, createX, createSunPosY);
+        InvokeRepeating("CreateSun", delay, delay);
+    }
+
+    public void StopCreateSun()
+    {
+        CancelInvoke();
     }
 }

@@ -68,10 +68,10 @@ public class PoolManager
        {
 
            // 创建这个预制体的缓存池数据 1+2+3=5  1+2+4=5  
-           List<GameObject> pool = new(){obj}; //1
-            pool.Add(obj); //2
-           poolDataDic[prefab] = pool; // 3
-           poolDataDic.Add(prefab,pool); //4
+           // List<GameObject> pool = new(){obj}; //1
+           //  pool.Add(obj); //2
+           // poolDataDic[prefab] = pool; // 3
+           // poolDataDic.Add(prefab,pool); //4
            //  prefab: [obj]
            //     key : value
            poolDataDic.Add(prefab, new List<GameObject> { obj });//5= poolDataDic.Add(prefab, new List<GameObject>{obj});
