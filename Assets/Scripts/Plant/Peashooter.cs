@@ -16,7 +16,7 @@ public class Peashooter : PlantBase
         }
     }
     // 是否可以攻击
-    private bool canAttack = true;
+    private bool canAttack;
     // 攻击的CD， 也就是攻击间隔
     private float attackCD = 1.4f;
     // 攻击力
@@ -26,7 +26,8 @@ public class Peashooter : PlantBase
 
     protected  override void OnInitForPlace()
     {
-        // 攻击
+        canAttack = true;
+        // 可能要攻击
         InvokeRepeating("Attack",0,0.2f);
     }
 

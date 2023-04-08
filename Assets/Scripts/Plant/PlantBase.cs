@@ -39,7 +39,7 @@ public abstract  class PlantBase : MonoBehaviour
         }
         else
         {
-           // spriteRenderer.color = new Color(1,1,1,1);
+            spriteRenderer.color = new Color(1,1,1,1);
             spriteRenderer.sortingOrder = 1;
         }
     }
@@ -48,7 +48,7 @@ public abstract  class PlantBase : MonoBehaviour
     public void InitForPlace(Grid grid,PlantType type)
     {
         InitForAll(type);
-       // spriteRenderer.color = new Color(1,1,1,1);
+       spriteRenderer.color = new Color(1,1,1,1);
         hp = MaxHp;
         currentGrid = grid;
         currentGrid.CurrPlantBase = this;

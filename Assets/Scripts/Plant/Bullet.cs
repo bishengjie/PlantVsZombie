@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody.AddForce(Vector2.right * 300);
         this.attackValue = attackValue;
-        
+        rigidbody.gravityScale = 0;
         isHit = false;
         // 修改成正常状态的图片
         spriteRenderer.sprite = GameManager.Instance.GameConf.Bullet1Nor;
@@ -30,6 +30,11 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         if(isHit)return;
+        if (transform.position.x > 7.7f)
+        {
+            Destroy();
+            return;
+        }
         transform.Rotate(new Vector3(0, 0, -15f));
     }
 
