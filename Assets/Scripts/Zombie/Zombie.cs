@@ -278,4 +278,9 @@ public class Zombie : MonoBehaviour
         spriteRenderer.color = Color.white;
         if (fun != null) fun();
     }
+
+    public void StartMove()
+    {
+        State = ZombieState.Walk;
+    }
 }

@@ -92,4 +92,12 @@ public class ZombieManager : MonoBehaviour
 
         return zombie;
     }
+
+    public void ZombieStartMove()
+    {
+        for (int i = 0; i < zombies.Count; i++)
+        {
+            zombies[i].StartMove();
+        }
+    }
 }
