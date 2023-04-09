@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     private UIPlantCard currCard;
     private LVStartEF LVStartEF;
     private LVInfoPanel LVInfoPanel;
+    private SetPanel SetPanel;
     public UIPlantCard CurrCard
     {
         get => currCard;
@@ -36,6 +37,8 @@ public class UIManager : MonoBehaviour
         SunNumText = transform.Find("MainPanel/SunNumText").GetComponent<Text>();
         LVStartEF = transform.Find("LVStartEF").GetComponent<LVStartEF>();
         LVInfoPanel = transform.Find("LVInfoPanel").GetComponent<LVInfoPanel>();
+        SetPanel = transform.Find("SetPanel").GetComponent<SetPanel>();
+        SetPanel.Show(false);
     }
 
     // 更新阳光的数字
@@ -68,5 +71,10 @@ public class UIManager : MonoBehaviour
     public void UpdateStageNum(int stage)
     {
         LVInfoPanel.UpdateStageNum(stage);
+    }
+
+    public void ShowSetPanel()
+    {
+        SetPanel.Show(true);
     }
 }
