@@ -104,6 +104,12 @@ public class GridManager : MonoBehaviour
         }
         return grid;
     }
+
+    public Grid GetGridByMouse()
+    {
+        return GetGridByWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+    }
+    
     ///<summary>
     ///通过Y轴来寻找一个网格，从下往上 0开始
     /// </summary>>

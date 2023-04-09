@@ -98,6 +98,7 @@ public abstract  class PlantBase : MonoBehaviour
         if (currentGrid != null)
         {
             currentGrid.CurrPlantBase = null;
+            currentGrid = null;
         }
         StopAllCoroutines();
         CancelInvoke();

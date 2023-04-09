@@ -8,8 +8,8 @@ public class LVInfoPanel : MonoBehaviour
 
     // 波数
     private Text stageNumText;
-
-    private void Start()
+    
+    void Awake()
     {
         dayNumText = transform.Find("DayNumText").GetComponent<Text>();
         print(dayNumText);
