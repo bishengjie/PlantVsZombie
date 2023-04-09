@@ -28,6 +28,7 @@ public class Shovel : MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IP
     void Start()
     {
         _shovelImage = transform.Find("Image");
+        LVManager.Instance.AddLevelStartActionListener(OnLevelStartAction);
     }
 
    
@@ -78,5 +79,10 @@ public class Shovel : MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IP
     public void OnPointerExit(PointerEventData eventData)
     {
         _shovelImage.transform.localScale = new Vector2(1f, 1f);
+    }
+
+    private void OnLevelStartAction()
+    {
+        IsShove = false;
     }
 }

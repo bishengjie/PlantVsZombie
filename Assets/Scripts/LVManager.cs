@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 
@@ -25,6 +26,7 @@ public class LVManager : MonoBehaviour
     private int currentLv;
     // 关卡中的阶段 波数
     private int stageInLV;
+    private UnityAction LevelStartAction;
     public LVState CurrLVState
     {
         get => currentLVState;
@@ -59,13 +61,15 @@ public class LVManager : MonoBehaviour
         set
         {
             stageInLV = value;
-            if (stageInLV>=3)
+            UIManager.Instance.UpdateStageNum(stageInLV - 1);
+            if (stageInLV > 2)
             {
-                // 更新天数
-                GameManager.Instance.CurrentLevel += 1;
-                return;
+                // 杀掉当前关卡的全部僵尸，就进入下一天
+                ZombieManager.Instance.AddAllZombieDeadAction(OnAllZombieDeadAction);
+                currentLVState = LVState.Over;
+
             }
-            UIManager.Instance.UpdateStageNum(stageInLV-1);
+
         }
     }
 
@@ -78,7 +82,7 @@ public class LVManager : MonoBehaviour
     public void StartLV(int level)
     {
         currentLv = level; // 关卡
-        UIManager.Instance.UpdateStageNum(currentLv);
+        UIManager.Instance.UpdateDayNum(currentLv);
         StageInLV = 1;
         CurrLVState = LVState.Start;
     }
@@ -122,6 +126,8 @@ public class LVManager : MonoBehaviour
         // 清理掉僵尸
         ZombieManager.Instance.ClearZombie();
         CurrLVState = LVState.Fight;
+        // 关卡开始时要做的事情
+        if (LevelStartAction != null) LevelStartAction();
     }
 
     //更新僵尸
@@ -137,5 +143,20 @@ public class LVManager : MonoBehaviour
         ZombieManager.Instance.ZombieStartMove();
         isUpdateZombie = false;
         StageInLV += 1;
+    }
+
+    // 添加关卡开始事件的监听者
+    public void AddLevelStartActionListener(UnityAction action)
+    {
+        LevelStartAction += action;
+    }
+
+    // 当全部僵尸死亡时触发的事件
+    private void OnAllZombieDeadAction()
+    {
+        // 更新天数
+        GameManager.Instance.CurrentLevel += 1;
+        // 执行一次之后，自己移除委托
+           ZombieManager.Instance.RemoveAllZombieDeadAction(OnAllZombieDeadAction); 
     }
 }

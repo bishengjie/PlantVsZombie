@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class ZombieManager : MonoBehaviour
@@ -9,7 +10,9 @@ public class ZombieManager : MonoBehaviour
     public static ZombieManager Instance;
     private List<Zombie> zombies = new ();
     private int currOrderNum = 0;
-
+    
+    //所有僵尸都死亡时的事件
+    private UnityAction AllZombieDeadAction;
     // 创建僵尸最大和最小的X坐标
     private float creatMaxX = 8.5f;
     private float creatMinX = 7.4f;
@@ -73,6 +76,7 @@ public class ZombieManager : MonoBehaviour
     public void RemoveZombie(Zombie zombie)
     {
         zombies.Remove(zombie);
+        CheckAllZombieDeadForLevel();
     }
 
     // 获取一个距离最近的僵尸
@@ -99,5 +103,22 @@ public class ZombieManager : MonoBehaviour
         {
             zombies[i].StartMove();
         }
+    }
+
+    // 为关卡管理器检查所有僵尸死亡时的事件
+    private void CheckAllZombieDeadForLevel()
+    {
+        if (zombies.Count == 0)
+        {
+            if (AllZombieDeadAction != null) AllZombieDeadAction();
+        }
+    }
+    public void AddAllZombieDeadAction(UnityAction action)
+    {
+        AllZombieDeadAction += action;
+    }
+    public void RemoveAllZombieDeadAction(UnityAction action)
+    {
+        AllZombieDeadAction -= action;
     }
 }

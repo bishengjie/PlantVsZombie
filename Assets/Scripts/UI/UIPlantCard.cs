@@ -141,6 +141,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         image = GetComponent<Image>();
         CanPlant = true;
         PlayerManager.Instance.AddSunNumUpdateActionListener(CheckState);
+        LVManager.Instance.AddLevelStartActionListener(OnLevelStartAction);
     }
 
     private void Update()
@@ -193,14 +194,27 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
         // 如果右键取消放置状态
-        if (Input.GetMouseButtonDown(1)) //0
+        if (Input.GetMouseButtonDown(1)) 
         {
-            if (plant != null) plantInGrid.Dead();
-            if (plantInGrid != null) plantInGrid.Dead();
-            plant = null;
-            plantInGrid = null;
-            WantPlant = false;
+            CancelPlace();
+            
         }
+    }
+    // 取消放置
+    private void CancelPlace()
+    {
+        if (plant != null) plantInGrid.Dead();
+        if (plantInGrid != null) plantInGrid.Dead();
+        plant = null;
+        plantInGrid = null;
+        WantPlant = false;
+    }
+    // 在关卡开始时需要做的事情
+    private void OnLevelStartAction()
+    {
+        CancelPlace();
+        // 重置CD
+        canPlant = true;
     }
 
     // 状态检测
