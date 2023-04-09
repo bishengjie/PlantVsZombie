@@ -18,16 +18,20 @@ public enum LVState
 public class LVManager : MonoBehaviour
 {
     public static LVManager Instance;
-    private static LVState currLVState;
+    private static LVState currentLVState;
     // 在刷新僵尸中
     private bool isUpdateZombie;
+    // 当前第几天 关卡数
+    private int currentLv;
+    // 关卡中的阶段 波数
+    private int stageInLV;
     public LVState CurrLVState
     {
-        get => currLVState;
+        get => currentLVState;
         set
         {
-            currLVState = value;
-            switch (currLVState)
+            currentLVState = value;
+            switch (currentLVState)
             {
                 case LVState.Start:
                     // 隐藏UI主面板
@@ -49,13 +53,33 @@ public class LVManager : MonoBehaviour
         }
     }
 
+    public int StageInLV
+    {
+        get => stageInLV;
+        set
+        {
+            stageInLV = value;
+            if (stageInLV>=3)
+            {
+                // 更新天数
+                GameManager.Instance.CurrentLevel += 1;
+                return;
+            }
+            UIManager.Instance.UpdateStageNum(stageInLV-1);
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
     }
 
-    private void Start()
+    //开始关卡
+    public void StartLV(int level)
     {
+        currentLv = level; // 关卡
+        UIManager.Instance.UpdateStageNum(currentLv);
+        StageInLV = 1;
         CurrLVState = LVState.Start;
     }
 
@@ -68,22 +92,25 @@ public class LVManager : MonoBehaviour
     {
         switch (CurrLVState)
         {
-            case  LVState.Start:
+            case LVState.Start:
                 break;
-            case  LVState.Fight:
+            case LVState.Fight:
                 // 刷新僵尸
                 //如果没有在刷新僵尸，则刷新僵尸
-                if (isUpdateZombie==false)
+                if (isUpdateZombie == false)
                 {
-                    //                                时间，数量
-                    UpdateZombie(Random.Range(10,20),Random.Range(1,3));
+                    // 僵尸刷新的时间                   时间，数量
+                    float updateZombie = Random.Range(15 - stageInLV / 2, 20 - stageInLV / 2);
+                    // 僵尸刷新的数量
+                    int updateNum = Random.Range(1, 3 + currentLv);
+                    UpdateZombie(updateZombie, updateNum);
                 }
                 break;
-            case  LVState.Over:
+            case LVState.Over:
                 break;
         }
     }
-    
+
 
     // 关卡开始时 摄像机回归后要执行的方法
     private void LVStartCameraBackAction()
@@ -109,5 +136,6 @@ public class LVManager : MonoBehaviour
         ZombieManager.Instance.UpdateZombie(zombieNum);
         ZombieManager.Instance.ZombieStartMove();
         isUpdateZombie = false;
+        StageInLV += 1;
     }
 }

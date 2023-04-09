@@ -6,23 +6,26 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
-    // 阳光预制体
-    public GameConf GameConf { get; private set; }
-    
+    public GameConf GameConf;//config配置
+    private int currentLevel;
+    public int CurrentLevel
+    {
+        get => currentLevel;
+        set
+        {
+            currentLevel = value;
+            LVManager.Instance.StartLV(currentLevel);
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
         GameConf = Resources.Load<GameConf>("GameConf");
     }
 
-    void Start()
+     void Start()
     {
-        
-    }
-    
-    void Update()
-    {
-      
+        CurrentLevel = 1;
     }
 }

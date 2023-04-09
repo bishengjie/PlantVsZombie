@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     // 当前的植物卡片
     private UIPlantCard currCard;
     private LVStartEF LVStartEF;
+    private LVInfoPanel LVInfoPanel;
     public UIPlantCard CurrCard
     {
         get => currCard;
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
         mainPanel = transform.Find("MainPanel").gameObject;
         SunNumText = transform.Find("MainPanel/SunNumText").GetComponent<Text>();
         LVStartEF = transform.Find("LVStartEF").GetComponent<LVStartEF>();
+        LVInfoPanel = transform.Find("LVInfoPanel").GetComponent<LVInfoPanel>();
     }
 
     // 更新阳光的数字
@@ -57,5 +59,14 @@ public class UIManager : MonoBehaviour
     public void ShowLVStartEF()
     {
         LVStartEF.Show();
+    }
+    public void UpdateDayNum(int day)
+    {
+        LVInfoPanel.UpdateDayNum(day);
+    }
+    
+    public void UpdateStageNum(int stage)
+    {
+        LVInfoPanel.UpdateStageNum(stage);
     }
 }
