@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7835a8c4c78af174385243468e1005f3, type: 3}
   m_Name: GameConf
   m_EditorClassIdentifier: 
+  EFAudio: {fileID: 7933250822990240965, guid: 771a40df58b73484983ad2c911f15870, type: 3}
+  buttonClick: {fileID: 8300000, guid: bf03c1238140af74592e98ae79a41e7f, type: 3}
+  pause: {fileID: 8300000, guid: b627f578f9e92a448848c591f0f00f3a, type: 3}
+  shovel: {fileID: 8300000, guid: c22ba31d3689ada409e39c618e7c7708, type: 3}
+  place: {fileID: 8300000, guid: cae4c9e57297f7f4b87518cff329c78c, type: 3}
+  sunClick: {fileID: 8300000, guid: 0254e0471fd5b2745b70eba41b278077, type: 3}
   Sun: {fileID: 669681080118290993, guid: 163b2b90cc9e6cb4c9fcbcbc7d65456a, type: 3}
   SunFlower: {fileID: 6573398450271479225, guid: 3658e97cb81bf9c4d88e420f6fdb947a, type: 3}
   Peashooter: {fileID: 5927592771599986669, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}

@@ -7,6 +7,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameConf",menuName = "GameConf")]
 public class GameConf : ScriptableObject
 {
+     [Tooltip("音乐")] 
+     public GameObject EFAudio;
+     public AudioClip buttonClick;
+     public AudioClip pause;
+     public AudioClip shovel;
+     public AudioClip place;
+     public AudioClip sunClick;
+     
      [Tooltip("阳光")] 
      public GameObject Sun;
      

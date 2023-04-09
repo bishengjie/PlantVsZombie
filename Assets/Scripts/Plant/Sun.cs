@@ -33,7 +33,7 @@ public class Sun : MonoBehaviour
         Vector3 sunNum= Camera.main.ScreenToWorldPoint(UIManager.Instance.GetSunNumTextPos());
         sunNum = new Vector3(sunNum.x, sunNum.y, 0); 
         FlyAnimation(sunNum);
-        
+        AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.sunClick);
     }
     
     // 当阳光从天空中初始化的方法

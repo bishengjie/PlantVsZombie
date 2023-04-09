@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
         LVStartEF = transform.Find("LVStartEF").GetComponent<LVStartEF>();
         LVInfoPanel = transform.Find("LVInfoPanel").GetComponent<LVInfoPanel>();
         SetPanel = transform.Find("SetPanel").GetComponent<SetPanel>();
-        SetPanel.Show(false);
+        SetPanel.gameObject.SetActive(false);
     }
 
     // 更新阳光的数字
@@ -75,6 +75,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowSetPanel()
     {
+        AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.pause);
         SetPanel.Show(true);
     }
 }

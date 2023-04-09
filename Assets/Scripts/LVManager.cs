@@ -23,7 +23,7 @@ public class LVManager : MonoBehaviour
     // 在刷新僵尸中
     private bool isUpdateZombie;
     // 当前第几天 关卡数
-    private int currentLv;
+    private int currentLevel;
     // 关卡中的阶段 波数
     private int stageInLV;
     private UnityAction LevelStartAction;
@@ -73,16 +73,33 @@ public class LVManager : MonoBehaviour
         }
     }
 
+    public int CurrentLevel
+    {
+        get => currentLevel;
+        set
+        {
+            currentLevel = value;
+            StartLV(currentLevel);
+        }
+    }
+    
+    
     private void Awake()
     {
         Instance = this;
     }
 
+    private void Start()
+    {
+        CurrentLevel = 1;
+    }
+    
+
     //开始关卡
     public void StartLV(int level)
     {
-        currentLv = level; // 关卡
-        UIManager.Instance.UpdateDayNum(currentLv);
+        currentLevel = level; // 关卡
+        UIManager.Instance.UpdateDayNum(currentLevel);
         StageInLV = 1;
         CurrLVState = LVState.Start;
     }
@@ -106,7 +123,7 @@ public class LVManager : MonoBehaviour
                     // 僵尸刷新的时间                   时间，数量
                     float updateZombie = Random.Range(15 - stageInLV / 2, 20 - stageInLV / 2);
                     // 僵尸刷新的数量
-                    int updateNum = Random.Range(1, 3 + currentLv);
+                    int updateNum = Random.Range(1, 3 + currentLevel);
                     UpdateZombie(updateZombie, updateNum);
                 }
                 break;
@@ -155,8 +172,8 @@ public class LVManager : MonoBehaviour
     private void OnAllZombieDeadAction()
     {
         // 更新天数
-        GameManager.Instance.CurrentLevel += 1;
+        CurrentLevel += 1;
         // 执行一次之后，自己移除委托
-           ZombieManager.Instance.RemoveAllZombieDeadAction(OnAllZombieDeadAction); 
+        ZombieManager.Instance.RemoveAllZombieDeadAction(OnAllZombieDeadAction);
     }
 }

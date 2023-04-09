@@ -179,6 +179,7 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     plantInGrid = null;
                     WantPlant = false;
                     CanPlant = false;
+                    AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.place);
                     // 种植成功需要减少玩家的阳光
                     PlayerManager.Instance.SunNum -= WantSunNum;
                 }
@@ -284,11 +285,11 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerClick(PointerEventData eventData)
     {
         if (CardState != CardState.CanPlant) return;
+        AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.buttonClick);
         if (!WantPlant)
         {
             WantPlant = true;
         }
-
         print("放置植物");
     }
 }

@@ -15,11 +15,13 @@ public class Shovel : MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IP
             // 需要铲植物
             if (_isShove)
             {
+                AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.shovel);
                 _shovelImage.localRotation=Quaternion.Euler(0,0,45);
             }
             // 把铲子放回去
             else
             {
+                AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.shovel);
                 _shovelImage.localRotation=Quaternion.Euler(0,0,0);
                 _shovelImage.transform.position = transform.position;
             }
