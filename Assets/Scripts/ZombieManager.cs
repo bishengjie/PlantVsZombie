@@ -29,6 +29,10 @@ public class ZombieManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    } 
+    private void Start()
+    {
+        Groan();
     }
 
     // 更新僵尸
@@ -120,5 +124,27 @@ public class ZombieManager : MonoBehaviour
     public void RemoveAllZombieDeadAction(UnityAction action)
     {
         AllZombieDeadAction -= action;
+    }
+
+    // 5秒进行一次，有一定概率播放呻吟音效
+    private void Groan()
+    {
+        StartCoroutine(DoGroan());
+    } 
+    IEnumerator DoGroan()
+    {
+        while (true)
+        {
+            // 有僵尸才进行随机
+            if (zombies.Count>0)
+            {
+                // 如果随机数大于6则播放
+                if (Random.Range(0, 10) > 6)
+                {
+                    AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.zombieGroan);
+                }
+            }
+            yield return new WaitForSeconds(5);
+        }
     }
 }

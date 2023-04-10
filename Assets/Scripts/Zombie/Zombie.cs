@@ -238,6 +238,14 @@ public class Zombie : MonoBehaviour
         // 植物的什么大于则扣血
         while (plant != null && plant.Hp > 0)
         {
+            int num = 0;
+            if (num == 5) num = 0;
+            // 播放僵尸吃植物的音效
+            if (num == 0)
+            {
+                AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.zombieEat);
+            }
+            num += 1;
             plant.Hurt(attackValue / 5);
             yield return new WaitForSeconds(0.2f);
         }

@@ -14,6 +14,12 @@ public class GameConf : ScriptableObject
      public AudioClip shovel;
      public AudioClip place;
      public AudioClip sunClick;
+    
+     
+     public AudioClip zombieEat;
+     public AudioClip zombieHurtForPea;
+     public AudioClip zombieGroan;//痛苦而发出声音 
+     
      
      [Tooltip("阳光")] 
      public GameObject Sun;

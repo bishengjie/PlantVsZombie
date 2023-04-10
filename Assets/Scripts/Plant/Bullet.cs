@@ -44,6 +44,8 @@ public class Bullet : MonoBehaviour
         if (col.tag == "Zombie")
         {
             isHit = true;
+            // 播放僵尸被豌豆射手攻击的音效
+            AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.zombieHurtForPea);
             // 让僵尸受伤
             col.GetComponentInParent<Zombie>().Hurt(attackValue);
             // 修改成击中的图片
