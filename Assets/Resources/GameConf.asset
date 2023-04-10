@@ -21,6 +21,7 @@ MonoBehaviour:
   zombieEat: {fileID: 8300000, guid: 95cec4a21ee77a444963e098a4bae57b, type: 3}
   zombieHurtForPea: {fileID: 8300000, guid: 6d85baddeb37c2e43bb8f351a38c1ea7, type: 3}
   zombieGroan: {fileID: 8300000, guid: 34ef520de284eb34fa5f144b3b80a5f0, type: 3}
+  gameOver: {fileID: 8300000, guid: 4d55a11ab67e2b6499d4b31886647f27, type: 3}
   Sun: {fileID: 669681080118290993, guid: 163b2b90cc9e6cb4c9fcbcbc7d65456a, type: 3}
   SunFlower: {fileID: 6573398450271479225, guid: 3658e97cb81bf9c4d88e420f6fdb947a, type: 3}
   Peashooter: {fileID: 5927592771599986669, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}

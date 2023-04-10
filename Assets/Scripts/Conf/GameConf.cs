@@ -19,6 +19,8 @@ public class GameConf : ScriptableObject
      public AudioClip zombieEat;
      public AudioClip zombieHurtForPea;
      public AudioClip zombieGroan;//痛苦而发出声音 
+
+     public AudioClip gameOver;
      
      
      [Tooltip("阳光")] 

@@ -20,6 +20,8 @@ public class LVManager : MonoBehaviour
 {
     public static LVManager Instance;
     private static LVState currentLVState;
+
+    private bool isOver;
     // 在刷新僵尸中
     private bool isUpdateZombie;
     // 当前第几天 关卡数
@@ -98,6 +100,7 @@ public class LVManager : MonoBehaviour
     //开始关卡
     public void StartLV(int level)
     {
+        if (isOver)return;
         currentLevel = level; // 关卡
         UIManager.Instance.UpdateDayNum(currentLevel);
         StageInLV = 1;
@@ -106,6 +109,7 @@ public class LVManager : MonoBehaviour
 
     private void Update()
     {
+        if (isOver)return;
         FSM();
     }
 
@@ -175,5 +179,19 @@ public class LVManager : MonoBehaviour
         CurrentLevel += 1;
         // 执行一次之后，自己移除委托
         ZombieManager.Instance.RemoveAllZombieDeadAction(OnAllZombieDeadAction);
+    }
+
+    // 游戏结束
+    public void GameOver()
+    {
+        // 效果
+        AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.zombieEat);
+        AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.gameOver);
+        isOver = true;
+        // 逻辑
+        SkySunManager.Instance.StopCreateSun();
+        ZombieManager.Instance.ClearZombie();
+        // UI
+        UIManager.Instance.GameOver();
     }
 }

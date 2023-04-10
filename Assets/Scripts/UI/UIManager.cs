@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class UIManager : MonoBehaviour
     private LVStartEF LVStartEF;
     private LVInfoPanel LVInfoPanel;
     private SetPanel SetPanel;
+    private OverPanel OverPanel;
     public UIPlantCard CurrCard
     {
         get => currCard;
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
         LVInfoPanel = transform.Find("LVInfoPanel").GetComponent<LVInfoPanel>();
         SetPanel = transform.Find("SetPanel").GetComponent<SetPanel>();
         SetPanel.gameObject.SetActive(false);
+        OverPanel = transform.Find("OverPanel").GetComponent<OverPanel>();
     }
 
     // 更新阳光的数字
@@ -77,5 +80,10 @@ public class UIManager : MonoBehaviour
     {
         AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.pause);
         SetPanel.Show(true);
+    }
+
+    public void GameOver()
+    {
+        OverPanel.Over();
     }
 }

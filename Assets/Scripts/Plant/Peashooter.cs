@@ -41,6 +41,9 @@ public class Peashooter : PlantBase
         // 僵尸必须在草坪上， 否侧跳出
         if (zombie.CurrGrid.Point.x == 8 &&
             Vector2.Distance(zombie.transform.position, zombie.CurrGrid.Position) > 1.5f) return;
+        // 如果僵尸不在我的右边，也跳出
+        if (zombie.transform.position.x < transform.position.x) return;
+
         // 从这里开始，都是可以正常攻击的
         // 在枪口实例化一个子弹
         Bullet bullet = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Bullet1).GetComponent<Bullet>();

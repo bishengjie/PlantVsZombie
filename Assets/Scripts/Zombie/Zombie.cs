@@ -221,6 +221,23 @@ public class Zombie : MonoBehaviour
             State = ZombieState.Attack;
             return;
         }
+        // 如果我在最左边的网格，并且我已经越过了它
+        else if (currGrid.Point.x == 0 && currGrid.Position.x - transform.position.x > 1f)
+        {
+            // 我们要走向终点 - 房子
+            Vector2 pos = transform.position;
+            Vector2 target = new Vector2(-9.17f, -1.37f);
+            Vector2 direction = (target - pos).normalized * 3f;
+            transform.Translate((direction * (Time.deltaTime / 1)) / speed);
+            // 如果我距离终点很近，意味着游戏结束
+            if (Vector2.Distance(target,pos)<0.05f)
+            {
+                // 出发游戏结束
+                LVManager.Instance.GameOver();
+               
+            }
+            return;
+        }
 
         transform.Translate((new Vector2(-1.33f, 0) * (Time.deltaTime / 1)) / speed);
     }
