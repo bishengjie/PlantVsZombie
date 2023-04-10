@@ -15,12 +15,16 @@ public class Peashooter : PlantBase
             return 300;
         }
     }
+    
+    // 攻击的CD， 也就是攻击间隔
+    protected override float attackCD => 1.4f;
+    // 攻击力
+    protected override int attackValue => 20;
+
+    
     // 是否可以攻击
     private bool canAttack;
-    // 攻击的CD， 也就是攻击间隔
-    private float attackCD = 1.4f;
-    // 攻击力
-    private int attackValue = 20;
+   
     // 创建子弹的偏移量
     private Vector3 creatBulletoffsetPos = new Vector2(0.562f, 0.386f);
 

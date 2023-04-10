@@ -102,7 +102,6 @@ public class Sun : MonoBehaviour
         }
 
         DestroySun();
-        print("销毁");
     }
 
     // 销毁

@@ -8,7 +8,8 @@ public enum PlantType
 {
      SunFlower,
      Peashooter,
-     WallNut
+     WallNut,  // 坚果
+     Spike // 地刺
 }
 public class PlantManager : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class PlantManager : MonoBehaviour
                     return GameManager.Instance.GameConf.Peashooter;
                case PlantType.WallNut:
                     return GameManager.Instance.GameConf.WallNut;
+               case PlantType.Spike:
+                    return GameManager.Instance.GameConf.Spike;
                     
           }
           return null;

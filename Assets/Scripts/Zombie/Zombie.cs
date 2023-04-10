@@ -217,7 +217,9 @@ public class Zombie : MonoBehaviour
         if (currGrid == null) return;
         currGrid = GridManager.Instance.GetGridByWorldPos(transform.position);
         // 当前网格中有植物并且在我的左边且距离很近
+        // 可以被僵尸吃掉它
         if (currGrid.HavePlant
+            && CurrGrid.CurrPlantBase.ZombieCanEat
             && currGrid.CurrPlantBase.transform.position.x < transform.position.x
             && transform.position.x - currGrid.CurrPlantBase.transform.position.x < 0.3f)
         {

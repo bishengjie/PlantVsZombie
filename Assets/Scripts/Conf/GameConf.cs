@@ -35,6 +35,9 @@ public class GameConf : ScriptableObject
      [Tooltip("土豆")] 
      public GameObject WallNut;
      
+     [Tooltip("地刺")] 
+     public GameObject Spike;
+     
      [Header("僵尸")]
      [Tooltip("僵尸的头")] 
      public GameObject Zombie_Head;

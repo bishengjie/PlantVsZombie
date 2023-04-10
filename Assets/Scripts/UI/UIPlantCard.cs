@@ -162,15 +162,16 @@ public class UIPlantCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 {
                     plantInGrid = PoolManager.Instance.GetObj(prefab).GetComponent<PlantBase>();
                     plantInGrid.transform.SetParent(PlantManager.Instance.transform);
-                    plantInGrid.InitForCreate(true,CardPlantType,grid.Position);
+                    plantInGrid.InitForCreate(true, CardPlantType, grid.Position);
                 }
                 else
                 {
-                    plantInGrid.transform.position = grid.Position;
+                    plantInGrid.UpdateForCreate(grid.Position);
+                    
                 }
 
                 // 如果点击鼠标，需要放置植物
-                if (Input.GetMouseButtonDown(0)) //0
+                if (Input.GetMouseButtonDown(0)) 
                 {
                     plant.transform.position = grid.Position;
                     plant.InitForPlace(grid,CardPlantType);

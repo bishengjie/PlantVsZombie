@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,9 +26,25 @@ public abstract  class PlantBase : MonoBehaviour
             HpUpdateEvent();
         }
     }
+
+    // 攻击的CD， 也就是攻击间隔
+    protected virtual float attackCD { get; }
+    // 攻击力
+    protected virtual int attackValue { get; }
+    
+    public virtual bool ZombieCanEat { get; } = true;
+    
+    // 偏移量，相对于网格
+    protected virtual Vector2 offset { get; } = Vector2.zero;
     
     public abstract float MaxHp { get ; }
-    
+
+    // 用于创建时网格变化时的更新
+    public void UpdateForCreate(Vector2 gridPos)
+    {
+        transform.position = gridPos + offset;
+    }
+
     // 任何情况的的通用初始化
     protected void InitForAll(PlantType type)
     {
@@ -39,8 +56,8 @@ public abstract  class PlantBase : MonoBehaviour
     // 创建时的初始化
     public void InitForCreate(bool inGrid,PlantType type,Vector2 pos)
     {
-        transform.position = pos;
         InitForAll(type);
+        transform.position = pos + offset;
         animator.speed = 0;
         if (inGrid)
         {
@@ -62,7 +79,7 @@ public abstract  class PlantBase : MonoBehaviour
         hp = MaxHp;
         currentGrid = grid;
         currentGrid.CurrPlantBase = this;
-        transform.position = grid.Position;
+        transform.position = grid.Position + offset;
         animator.speed = 1;
         spriteRenderer.sortingOrder = 0;
         OnInitForPlace();
@@ -115,6 +132,14 @@ public abstract  class PlantBase : MonoBehaviour
         PoolManager.Instance.PushObj(PlantManager.Instance.GetPlantByType(plantType),gameObject);
     }
     protected virtual void OnInitForPlace()
+    {
+        
+    } 
+    protected virtual void OnInitForCreate()
+    {
+        
+    }
+    protected virtual void OnInitForAll()
     {
         
     } 

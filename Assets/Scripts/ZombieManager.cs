@@ -101,6 +101,25 @@ public class ZombieManager : MonoBehaviour
         return zombie;
     }
 
+    // 获取指定Y轴 X轴距离指定目标 小于 指定距离的僵尸们
+    //                              指定Y轴       指定目标             指定距离
+    public List<Zombie> GetZombies(int lineNum, Vector2 targetPos, float distance)
+    {
+        List<Zombie> temps = new List<Zombie>();
+        for (int i = 0; i < zombies.Count; i++)
+        {
+            if (zombies[i].CurrGrid.Point.y == lineNum
+                && Vector2.Distance(new Vector2(targetPos.x, 0),
+                    new Vector2(zombies[i].transform.position.x + 0.52f, 0)) <
+                distance)
+            {
+                temps.Add(zombies[i]);
+            }
+        }
+
+        return temps;
+    }
+
     public void ZombieStartMove()
     {
         for (int i = 0; i < zombies.Count; i++)

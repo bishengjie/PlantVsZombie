@@ -38,6 +38,6 @@ public abstract class BaseEffectObj : MonoBehaviour
         CancelInvoke();
         // 把自己放进缓存池
         PoolManager.Instance.PushObj(PrefabForObjPool, gameObject);
-        print("有");
+        
     }
 }
