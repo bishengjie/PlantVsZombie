@@ -44,7 +44,8 @@ public class Camera_C : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             transform.Translate(direction * 0.1f);
         }
-
+        // 如果到了这个位置，意味着相机已经到了最右边
+        yield return new WaitForSeconds(1.5f);
         if (action != null) action();
     }
 }

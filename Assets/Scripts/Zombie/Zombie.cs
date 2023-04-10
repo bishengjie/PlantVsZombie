@@ -70,13 +70,17 @@ public class Zombie : MonoBehaviour
                 head.Init(animator.transform.position);
                 // 状态检测
                 CheckState();
-
             }
-
             if (hp <= 0)
             {
+                print("死死死");
                 State = ZombieState.Dead;
+                // 创建一个死亡身体，用于体现效果
+                Zombie_DieBody body = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Zombie_DieBody)
+                    .GetComponent<Zombie_DieBody>();
+                body.Init(animator.transform.position);
             }
+
         }
     }
 

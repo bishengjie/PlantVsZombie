@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            Application.targetFrameRate = 60;
             GameConf = Resources.Load<GameConf>("GameConf");
             DontDestroyOnLoad(gameObject);
         }

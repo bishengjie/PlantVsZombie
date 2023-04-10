@@ -26,6 +26,7 @@ MonoBehaviour:
   SunFlower: {fileID: 6573398450271479225, guid: 3658e97cb81bf9c4d88e420f6fdb947a, type: 3}
   Peashooter: {fileID: 5927592771599986669, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
   Zombie_Head: {fileID: 7341836441323119467, guid: 8d5b10d503a12a14cbf27e112a94d1c9, type: 3}
+  Zombie_DieBody: {fileID: 2817438274816856215, guid: 172b6911bba499041879b34666412bd3, type: 3}
   Zombie: {fileID: 3414327221192055382, guid: 56691f7f985d66647a9b44639a089540, type: 3}
   Bullet1Hit: {fileID: 21300000, guid: 872c6bd918b1246408971b9b325ebcc6, type: 3}
   Bullet1: {fileID: 2084582800634217076, guid: a9bc23fbc3235454982e498279566189, type: 3}

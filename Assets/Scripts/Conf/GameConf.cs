@@ -35,6 +35,8 @@ public class GameConf : ScriptableObject
      [Header("僵尸")]
      [Tooltip("僵尸的头")] 
      public GameObject Zombie_Head;
+     [Tooltip("僵尸的死亡身体")] 
+     public GameObject Zombie_DieBody;
      [Tooltip("普通僵尸")] 
      public GameObject Zombie;
      
