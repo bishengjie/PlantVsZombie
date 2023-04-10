@@ -30,7 +30,10 @@ public class GameConf : ScriptableObject
      public GameObject SunFlower;
      
      [Tooltip("豌豆射手")] 
-     public GameObject Peashooter;
+     public GameObject Peashooter; 
+     
+     [Tooltip("土豆")] 
+     public GameObject WallNut;
      
      [Header("僵尸")]
      [Tooltip("僵尸的头")] 

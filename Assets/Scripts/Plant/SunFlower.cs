@@ -19,7 +19,6 @@ public class SunFlower : PlantBase
     
     protected override void OnInitForPlace()
     {
-        hp = 300f;
         InvokeRepeating("CreateSun", createSunTime, createSunTime);
     }
     // 创建阳光

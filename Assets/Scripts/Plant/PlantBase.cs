@@ -15,7 +15,17 @@ public abstract  class PlantBase : MonoBehaviour
     protected float hp;
     protected PlantType plantType;
 
-    public float Hp { get => hp; }
+    public float Hp
+    {
+        get => hp;
+        protected set
+        {
+            hp = value;
+            // 生命值发生变化瞬间要做的事情
+            HpUpdateEvent();
+        }
+    }
+    
     public abstract float MaxHp { get ; }
     
     // 任何情况的的通用初始化
@@ -64,7 +74,7 @@ public abstract  class PlantBase : MonoBehaviour
     /// <param name="hurtValue"></param>
     public void Hurt(float hurtValue)
     {
-        hp -= hurtValue;
+        Hp -= hurtValue;
         print(hp);
         // 发光效果
         StartCoroutine(ColorEF(0.2f, new Color(0.5f, 0.5f, 0.5f), 0.05f, null));
@@ -105,6 +115,10 @@ public abstract  class PlantBase : MonoBehaviour
         PoolManager.Instance.PushObj(PlantManager.Instance.GetPlantByType(plantType),gameObject);
     }
     protected virtual void OnInitForPlace()
+    {
+        
+    } 
+    protected virtual void HpUpdateEvent()
     {
         
     }
