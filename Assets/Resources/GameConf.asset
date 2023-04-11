@@ -27,6 +27,7 @@ MonoBehaviour:
   Peashooter: {fileID: 5927592771599986669, guid: 97055e308aacbad43b75f11fc3de6cdb, type: 3}
   WallNut: {fileID: 894802116597674200, guid: efbc612ace977c8459d0aa0792010eec, type: 3}
   Spike: {fileID: 7892604109884285991, guid: 72fa582165d17304fa9941133984539e, type: 3}
+  Cherry: {fileID: 1957296679052670138, guid: a8a2c511a20b85d43a3f6c900cfa3831, type: 3}
   Zombie_Head: {fileID: 7341836441323119467, guid: 8d5b10d503a12a14cbf27e112a94d1c9, type: 3}
   Zombie_DieBody: {fileID: 2817438274816856215, guid: 172b6911bba499041879b34666412bd3, type: 3}
   Zombie: {fileID: 3414327221192055382, guid: 56691f7f985d66647a9b44639a089540, type: 3}

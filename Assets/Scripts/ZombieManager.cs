@@ -119,6 +119,21 @@ public class ZombieManager : MonoBehaviour
 
         return temps;
     }
+    
+    // 获取距离目标指定范围内的全部僵尸
+    public List<Zombie> GetZombies(Vector2 targetPos, float distance)
+    {
+        List<Zombie> temps = new List<Zombie>();
+        for (int i = 0; i < zombies.Count; i++)
+        {
+            if (Vector2.Distance(targetPos, zombies[i].transform.position) < distance)
+            {
+                temps.Add(zombies[i]);
+            }
+        }
+
+        return temps;
+    }
 
     public void ZombieStartMove()
     {
