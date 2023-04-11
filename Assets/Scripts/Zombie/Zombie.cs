@@ -284,6 +284,26 @@ public class Zombie : MonoBehaviour
         StartCoroutine(ColorEF(0.2f, new Color(0.4f, 0.4f, 0.4f), 0.05f, null));
     }
 
+    // 炸伤
+    public void BoomHurt(int attackValue)
+    {
+        if (attackValue >= Hp)
+        {
+            // 炸死逻辑
+            State = ZombieState.Dead;
+            // 创建一个死亡身体，用于体现效果
+            Zombie_DieBody body = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Zombie_DieBody)
+                .GetComponent<Zombie_DieBody>();
+            body.InitForBoomDie(animator.transform.position);
+            
+        }
+        else
+        {
+            // 普通受伤逻辑
+            Hurt(attackValue);
+        }
+    }
+    
     public void Dead()
     {
         // 告诉僵尸管理器，僵尸死了

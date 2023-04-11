@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class Boom : BaseEffectObj
 {
-    protected override GameObject PrefabForObjPool => GameManager.Instance.GameConf.Boom;
+    public override string AnimationName => "Boom";
+    public override GameObject PrefabForObjPool => GameManager.Instance.GameConf.Boom;
+
 }

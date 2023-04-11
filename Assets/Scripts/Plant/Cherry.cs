@@ -37,7 +37,7 @@ public class Cherry : PlantBase
         if (zombies == null) return;
         for (int i = 0; i < zombies.Count; i++)
         {
-            zombies[i].Hurt(attackValue);
+            zombies[i].BoomHurt(attackValue);
         }
         // 生成攻击特效
         // 创建一个头

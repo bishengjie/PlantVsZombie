@@ -8,15 +8,24 @@ public abstract class BaseEffectObj : MonoBehaviour
     private Animator animator;
     private bool isOver;
 
-    protected abstract GameObject PrefabForObjPool { get; }
+    public abstract string AnimationName { get; }
     
-    public void Init(Vector2 pos)
+    public abstract GameObject PrefabForObjPool { get; }
+    
+    public void Init(Vector2 pos,string animationName=null)
     {
         animator = GetComponent<Animator>();
         transform.position = pos;
         isOver = false;
         animator.speed = 1;
-        animator.Play("Init", 0, 0);
+        if (animationName!=null)
+        {
+            animator.Play(animationName, 0, 0);
+        }
+        else
+        {
+            animator.Play(AnimationName, 0, 0);
+        }
     }
 
     void Update()
