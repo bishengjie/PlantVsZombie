@@ -2292,8 +2292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76be7976786c2c9488623b427e8f92f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WantSunNum: 0
-  CDTime: 0
+  WantSunNum: 150
+  CDTime: 50
   CardPlantType: 4
 --- !u!114 &918573308
 MonoBehaviour:
