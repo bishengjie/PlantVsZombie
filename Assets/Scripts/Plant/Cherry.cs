@@ -30,7 +30,8 @@ public class Cherry : PlantBase
 
     private void Boom()
     {
-        
+        // 播放爆炸音效
+        AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.boom);
         // 找到可以被我攻击的并且附加伤害
         List<Zombie> zombies = ZombieManager.Instance.GetZombies(transform.position,2.25f);
         if (zombies == null) return;
@@ -39,6 +40,10 @@ public class Cherry : PlantBase
             zombies[i].Hurt(attackValue);
         }
         // 生成攻击特效
+        // 创建一个头
+        Boom boom = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Boom)
+            .GetComponent<Boom>();
+        boom.Init(transform.position);
         // 自身死亡
         Dead();
             

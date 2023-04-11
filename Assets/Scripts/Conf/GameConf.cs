@@ -14,6 +14,7 @@ public class GameConf : ScriptableObject
      public AudioClip shovel;
      public AudioClip place;
      public AudioClip sunClick;
+     public AudioClip boom;
     
      
      public AudioClip zombieEat;
@@ -56,5 +57,7 @@ public class GameConf : ScriptableObject
      public GameObject Bullet1;
      [Tooltip("豌豆正常")] 
      public Sprite Bullet1Nor;
+     [Tooltip("爆炸效果")] 
+     public GameObject Boom;
 
 }

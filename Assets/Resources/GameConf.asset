@@ -18,6 +18,7 @@ MonoBehaviour:
   shovel: {fileID: 8300000, guid: c22ba31d3689ada409e39c618e7c7708, type: 3}
   place: {fileID: 8300000, guid: cae4c9e57297f7f4b87518cff329c78c, type: 3}
   sunClick: {fileID: 8300000, guid: 0254e0471fd5b2745b70eba41b278077, type: 3}
+  boom: {fileID: 8300000, guid: 39d4e4fbcb90e9b48b672b7a4cc13fde, type: 3}
   zombieEat: {fileID: 8300000, guid: 95cec4a21ee77a444963e098a4bae57b, type: 3}
   zombieHurtForPea: {fileID: 8300000, guid: 6d85baddeb37c2e43bb8f351a38c1ea7, type: 3}
   zombieGroan: {fileID: 8300000, guid: 34ef520de284eb34fa5f144b3b80a5f0, type: 3}
@@ -34,3 +35,4 @@ MonoBehaviour:
   Bullet1Hit: {fileID: 21300000, guid: 872c6bd918b1246408971b9b325ebcc6, type: 3}
   Bullet1: {fileID: 2084582800634217076, guid: a9bc23fbc3235454982e498279566189, type: 3}
   Bullet1Nor: {fileID: 21300000, guid: b6372bc55a4872d40b4c342c28337821, type: 3}
+  Boom: {fileID: 959848211087635408, guid: 27680125bc748f54ca237ed3972bf9e9, type: 3}
