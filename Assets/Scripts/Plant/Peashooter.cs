@@ -39,7 +39,7 @@ public class Peashooter : PlantBase
     {
         if (canAttack == false) return;
         // 从僵尸管理器中获取一个最近的僵尸
-        Zombie zombie = ZombieManager.Instance.GetZombieByLineMinDistance((int)currentGrid.Point.y, transform.position);
+        ZombieBase zombie = ZombieManager.Instance.GetZombieByLineMinDistance((int)currentGrid.Point.y, transform.position);
         // 没有僵尸 跳出
         if (zombie == null) return;
         // 僵尸必须在草坪上， 否侧跳出

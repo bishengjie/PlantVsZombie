@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class ZombieManager : MonoBehaviour
 {
     public static ZombieManager Instance;
-    private List<Zombie> zombies = new ();
+    private List<ZombieBase> zombies = new ();
     private int currOrderNum = 0;
     
     //所有僵尸都死亡时的事件
@@ -43,7 +43,6 @@ public class ZombieManager : MonoBehaviour
             CreateZombie(Random.Range(0,5));
         }
 
-        print("生成僵尸");
     }
 
     // 清理掉所有僵尸
@@ -51,7 +50,7 @@ public class ZombieManager : MonoBehaviour
     {
         while (zombies.Count > 0)
         {
-            zombies[0].Dead();
+            zombies[0].Dead(false);
         }
     }
 
@@ -65,28 +64,28 @@ public class ZombieManager : MonoBehaviour
     // 创建僵尸
     private void CreateZombie(int lineNum)
     {
-        Zombie zombie = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Zombie).GetComponent<Zombie>();
+        ZombieBase zombie = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Zombie).GetComponent<ZombieBase>();
         AddZombie(zombie);
         zombie.transform.SetParent(transform);
         zombie.Init(lineNum, CurrOrderNum,new Vector2(GetPosXRangeForCreateZombie(),0));
         CurrOrderNum++;
     }
 
-    public void AddZombie(Zombie zombie)
+    public void AddZombie(ZombieBase zombie)
     {
         zombies.Add(zombie);
     }
     
-    public void RemoveZombie(Zombie zombie)
+    public void RemoveZombie(ZombieBase zombie)
     {
         zombies.Remove(zombie);
         CheckAllZombieDeadForLevel();
     }
 
     // 获取一个距离最近的僵尸
-    public Zombie GetZombieByLineMinDistance(int lineNum, Vector3 pos)
+    public ZombieBase GetZombieByLineMinDistance(int lineNum, Vector3 pos)
     {
-        Zombie zombie = null;
+        ZombieBase zombie = null;
         float distance = 10000;
         for (int i = 0; i < zombies.Count; i++)
         {
@@ -103,9 +102,9 @@ public class ZombieManager : MonoBehaviour
 
     // 获取指定Y轴 X轴距离指定目标 小于 指定距离的僵尸们
     //                              指定Y轴       指定目标             指定距离
-    public List<Zombie> GetZombies(int lineNum, Vector2 targetPos, float distance)
+    public List<ZombieBase> GetZombies(int lineNum, Vector2 targetPos, float distance)
     {
-        List<Zombie> temps = new List<Zombie>();
+        List<ZombieBase> temps = new List<ZombieBase>();
         for (int i = 0; i < zombies.Count; i++)
         {
             if (zombies[i].CurrGrid.Point.y == lineNum
@@ -121,9 +120,9 @@ public class ZombieManager : MonoBehaviour
     }
     
     // 获取距离目标指定范围内的全部僵尸
-    public List<Zombie> GetZombies(Vector2 targetPos, float distance)
+    public List<ZombieBase> GetZombies(Vector2 targetPos, float distance)
     {
-        List<Zombie> temps = new List<Zombie>();
+        List<ZombieBase> temps = new List<ZombieBase>();
         for (int i = 0; i < zombies.Count; i++)
         {
             if (Vector2.Distance(targetPos, zombies[i].transform.position) < distance)

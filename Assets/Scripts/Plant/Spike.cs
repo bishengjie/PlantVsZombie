@@ -25,7 +25,7 @@ public class Spike : PlantBase
     private void CheckAttack()
     {
         // 找到可以被我攻击的并且附加伤害
-        List<Zombie> zombies = ZombieManager.Instance.GetZombies((int)currentGrid.Point.y, transform.position, 0.665f);
+        List<ZombieBase> zombies = ZombieManager.Instance.GetZombies((int)currentGrid.Point.y, transform.position, 0.665f);
         if (zombies == null) return;
         for (int i = 0; i < zombies.Count; i++)
         {
