@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
+public enum ZombieType
+{
+    Zombie,
+    FlagZombie
+}
 public class ZombieManager : MonoBehaviour
 {
     public static ZombieManager Instance;
@@ -36,11 +41,11 @@ public class ZombieManager : MonoBehaviour
     }
 
     // 更新僵尸
-    public void UpdateZombie(int zombieNum)
+    public void UpdateZombie(int zombieNum,ZombieType zombieType)
     {
         for (int i = 0; i < zombieNum; i++)
         {
-            CreateZombie(Random.Range(0,5));
+            CreateZombie(Random.Range(0,5),zombieType);
         }
 
     }
@@ -62,9 +67,20 @@ public class ZombieManager : MonoBehaviour
     }
 
     // 创建僵尸
-    private void CreateZombie(int lineNum)
+    private void CreateZombie(int lineNum,ZombieType zombieType)
     {
-        ZombieBase zombie = PoolManager.Instance.GetObj(GameManager.Instance.GameConf.Zombie).GetComponent<ZombieBase>();
+        GameObject prefab = null;
+        switch (zombieType)
+        {
+            case ZombieType.Zombie:
+                prefab = GameManager.Instance.GameConf.Zombie;
+                break;
+            case ZombieType.FlagZombie:
+                prefab = GameManager.Instance.GameConf.FlagZombie;
+                break;
+        }
+
+        ZombieBase zombie = PoolManager.Instance.GetObj(prefab).GetComponent<ZombieBase>();
         AddZombie(zombie);
         zombie.transform.SetParent(transform);
         zombie.Init(lineNum, CurrOrderNum,new Vector2(GetPosXRangeForCreateZombie(),0));

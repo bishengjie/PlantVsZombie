@@ -49,6 +49,13 @@ public class GameConf : ScriptableObject
      public GameObject Zombie_DieBody;
      [Tooltip("普通僵尸")] 
      public GameObject Zombie;
+
+     [Header("旗帜僵尸")]
+     [Tooltip("旗帜僵尸")]
+     public GameObject FlagZombie;
+        
+     
+     
      
      [Header("子弹")]
      [Tooltip("豌豆击中")] 

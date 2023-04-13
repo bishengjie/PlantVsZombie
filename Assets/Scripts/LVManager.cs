@@ -41,7 +41,7 @@ public class LVManager : MonoBehaviour
                     // 隐藏UI主面板
                     UIManager.Instance.SetmainPanelActive(false);
                     //刷新僵尸秀的僵尸
-                    ZombieManager.Instance.UpdateZombie(5);
+                    ZombieManager.Instance.UpdateZombie(5,ZombieType.Zombie);
                     // 摄像机移动到右侧观察关卡僵尸
                     Camera_C.Instance.StartMove(LVStartCameraBackAction);
                     break;
@@ -124,6 +124,11 @@ public class LVManager : MonoBehaviour
                 //如果没有在刷新僵尸，则刷新僵尸
                 if (isUpdateZombie == false)
                 {
+                    // 意味着是最后一波，需要刷新一个旗帜僵尸
+                    if (StageInLV==2)
+                    {
+                        ZombieManager.Instance.UpdateZombie(1,ZombieType.FlagZombie);
+                    }
                     // 僵尸刷新的时间                   时间，数量
                     float updateZombie = Random.Range(15 - stageInLV / 2, 20 - stageInLV / 2);
                     // 僵尸刷新的数量
@@ -160,7 +165,7 @@ public class LVManager : MonoBehaviour
     {
         isUpdateZombie = true;
         yield return new WaitForSeconds(delay);
-        ZombieManager.Instance.UpdateZombie(zombieNum);
+        ZombieManager.Instance.UpdateZombie(zombieNum,ZombieType.Zombie);
         ZombieManager.Instance.ZombieStartMove();
         isUpdateZombie = false;
         StageInLV += 1;

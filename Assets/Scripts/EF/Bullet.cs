@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
             // 播放僵尸被豌豆射手攻击的音效
             AudioManager.Instance.PlayEFAudio(GameManager.Instance.GameConf.zombieHurtForPea);
             // 让僵尸受伤
-            col.GetComponentInParent<Zombie>().Hurt(attackValue);
+            col.GetComponentInParent<ZombieBase>().Hurt(attackValue);
             // 修改成击中的图片
             spriteRenderer.sprite = GameManager.Instance.GameConf.Bullet1Hit;
             // 暂停自身的运动
