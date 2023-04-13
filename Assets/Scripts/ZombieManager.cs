@@ -9,7 +9,8 @@ public enum ZombieType
 {
     Zombie,
     FlagZombie,
-    ConeheadZombie
+    ConeheadZombie,
+    BucketheadZombie
 }
 public class ZombieManager : MonoBehaviour
 {
@@ -93,6 +94,9 @@ public class ZombieManager : MonoBehaviour
                 break;
             case ZombieType.ConeheadZombie:
                 prefab = GameManager.Instance.GameConf.ConeheadZombie;
+                break; 
+            case ZombieType.BucketheadZombie:
+                prefab = GameManager.Instance.GameConf.BucketheadZombie;
                 break;
         }
 

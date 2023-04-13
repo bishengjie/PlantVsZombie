@@ -34,6 +34,7 @@ MonoBehaviour:
   Zombie: {fileID: 3414327221192055382, guid: 56691f7f985d66647a9b44639a089540, type: 3}
   FlagZombie: {fileID: 4622944561234096534, guid: 271b7855bfeb84f48a28b115b7a00bac, type: 3}
   ConeheadZombie: {fileID: 8555592012104154220, guid: d52d3087a1b41a049894e570fe720f2c, type: 3}
+  BucketheadZombie: {fileID: 7712682305872023282, guid: 5cedb09bdf65fe446bb1d48394609623, type: 3}
   Bullet1Hit: {fileID: 21300000, guid: 872c6bd918b1246408971b9b325ebcc6, type: 3}
   Bullet1: {fileID: 2084582800634217076, guid: a9bc23fbc3235454982e498279566189, type: 3}
   Bullet1Nor: {fileID: 21300000, guid: b6372bc55a4872d40b4c342c28337821, type: 3}

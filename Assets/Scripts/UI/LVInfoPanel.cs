@@ -12,9 +12,7 @@ public class LVInfoPanel : MonoBehaviour
     void Awake()
     {
         dayNumText = transform.Find("DayNumText").GetComponent<Text>();
-        print(dayNumText);
         stageNumText = transform.Find("StageNumText").GetComponent<Text>();
-        print(stageNumText);
     }
 
 
