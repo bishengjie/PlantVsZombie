@@ -165,7 +165,7 @@ public class LVManager : MonoBehaviour
     {
         isUpdateZombie = true;
         yield return new WaitForSeconds(delay);
-        ZombieManager.Instance.UpdateZombie(zombieNum,ZombieType.Zombie);
+        ZombieManager.Instance.UpdateZombie(zombieNum,ZombieType.ConeheadZombie);
         ZombieManager.Instance.ZombieStartMove();
         isUpdateZombie = false;
         StageInLV += 1;

@@ -10,7 +10,7 @@ public class ZombieHpState
     // 生命值阶段maxhp,80,30
     private List<int> hpLimit;
     // 生命值阶段的不同行走动画
-    private List<string> hpLimitWakAnimationStr;
+    public List<string> hpLimitWakAnimationStr;
     // 生命值阶段的不同攻击动画
     private List<string> hpLimitAttackAnimationStr;
     

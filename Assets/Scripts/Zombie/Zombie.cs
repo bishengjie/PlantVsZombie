@@ -67,6 +67,13 @@ public class Zombie : ZombieBase
             // 状态检测
             CheckState();
         }
+    }
 
+    // 从其他僵尸那里初始化
+    public void InitForOnTheZombieCreate(float time)
+    {
+        // 把行走动画确定在walk3
+        zombieHpState.hpLimitWakAnimationStr[0] = "Zombie_Walk3";
+        animator.Play("Zombie_Walk3",0,time);
     }
 }

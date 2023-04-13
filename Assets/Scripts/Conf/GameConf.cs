@@ -53,6 +53,8 @@ public class GameConf : ScriptableObject
      [Header("旗帜僵尸")]
      [Tooltip("旗帜僵尸")]
      public GameObject FlagZombie;
+     [Tooltip("路障僵尸")]
+     public GameObject ConeheadZombie;
         
      
      

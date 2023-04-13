@@ -8,7 +8,8 @@ using Random = UnityEngine.Random;
 public enum ZombieType
 {
     Zombie,
-    FlagZombie
+    FlagZombie,
+    ConeheadZombie
 }
 public class ZombieManager : MonoBehaviour
 {
@@ -66,6 +67,18 @@ public class ZombieManager : MonoBehaviour
         return Random.Range(creatMinX, creatMaxX);
     }
 
+    // 创建一个普通僵尸
+    public Zombie CreateStateZombie(int lineNum,Vector2 pos)
+    {
+        GameObject prefab=GameManager.Instance.GameConf.Zombie;
+        Zombie zombie = PoolManager.Instance.GetObj(prefab).GetComponent<Zombie>();
+        AddZombie(zombie);
+        zombie.transform.SetParent(transform);
+        zombie.Init(lineNum, CurrOrderNum,pos);
+        CurrOrderNum++;
+        return zombie;
+    }
+    
     // 创建僵尸
     private void CreateZombie(int lineNum,ZombieType zombieType)
     {
@@ -77,6 +90,9 @@ public class ZombieManager : MonoBehaviour
                 break;
             case ZombieType.FlagZombie:
                 prefab = GameManager.Instance.GameConf.FlagZombie;
+                break;
+            case ZombieType.ConeheadZombie:
+                prefab = GameManager.Instance.GameConf.ConeheadZombie;
                 break;
         }
 
